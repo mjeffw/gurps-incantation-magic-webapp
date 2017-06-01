@@ -1,0 +1,44 @@
+<div>
+  <material-input label='Spell Name'
+                  required='true'
+                  class='title'
+                  [(ngModel)]='name'></material-input>
+
+  <material-list>
+    <div group>
+      <div label>Spell Effects</div>
+      <material-list-item *ngFor='let item of strings; let i = index'>
+        <material-dropdown-select [options]='effectList'
+                                  [buttonText]='singleSelectEffectLabel'
+                                  [selection]='effectSelectModel'></material-dropdown-select>
+        {{item}}
+        <material-button icon class='material-list-item-secondary'>
+          <glyph icon='remove_circle' class='remove-button'></glyph>
+        </material-button>
+      </material-list-item>
+      <material-list-item>
+        <material-button class='insert-button'>ADD EFFECT</material-button>
+      </material-list-item>
+    </div>
+    <div group>
+      <div label>Ritual Modifiers</div>
+    </div>
+  </material-list>
+
+  <div>
+    <div *ngFor='let item of strings; let i = index' id='effect'>
+      <material-fab raised='true' mini class='remove-btn red'>
+        <glyph icon='remove'></glyph>
+      </material-fab>
+      <div class='effect-field-wrap'>
+        <material-input class='effect-input' type='text' [(ngModel)]='strings[i]'></material-input>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <material-fab raised='true' mini>
+    <glyph icon='add'></glyph>
+  </material-fab>
+</div>

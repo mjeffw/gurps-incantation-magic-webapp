@@ -1,0 +1,62 @@
+:host {
+    /* This is equivalent of the 'body' selector of a page. */
+}
+
+.title {
+    font-size: larger;
+    font-weight: bolder;
+    width: 100%;
+}
+
+.subheading {
+    margin-left: 8px;
+}
+
+.remove-button {
+    color: red;
+}
+
+.insert-button {
+    color: blue;
+}
+
+
+/*
+ When combined with the effect-field-wrap and effect-input classes,
+ produces layout where the remove button floats to the right as far
+ as possible, while the effect component sits to the left and takes
+ up the remainder of the line. Example:
+
+ <div>
+   <!-- the following component will be right-justified -->
+   <material-fab raised='true' mini class='remove-btn'>
+     <glyph icon='remove'></glyph>
+   </material-fab>
+
+   <!-- this div will sets up the proper spacing and overflow for the component -->
+   <div class='effect-field-wrap'>
+
+     <!-- this component will be left-justified and take up all
+          the room not being used by the right-justified compoent -->
+     <material-input class='effect-input' type='text' [(ngModel)]='strings[i]'></material-input>
+   </div>
+ </div>
+*/
+.remove-btn {
+    float: right;
+    margin-left: 10px;
+    color: red;
+}
+
+/* put this class in a div that surrounds the component */
+.effect-field-wrap {
+    overflow: hidden;
+    /* in some cases the padding and border of the input need to be cleared with this: */
+    padding-right: 12px; /* 5 + 5 + 1 + 1 */
+}
+
+/* apply this class to the component */
+.effect-input {
+    width: 100%;
+    padding: 0 5px;
+}
