@@ -8,8 +8,21 @@
     width: 100%;
 }
 
+.description {
+    width: 100%;
+}
+
 .subheading {
-    margin-left: 8px;
+    font-family: Roboto, sans-serif;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-size: 1rem;
+    font-weight: 400;
+/*    letter-spacing: 0.04em; */
+/*    line-height: 1.25rem; */
+    color: rgba(0, 0, 0, 0.54);
+    padding-bottom: 4px;
+    vertical-align: bottom;
 }
 
 .remove-button {
@@ -20,43 +33,131 @@
     color: blue;
 }
 
+.mdc-list {
+  font-family: Roboto, sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.75rem;
+  color: rgba(0, 0, 0, 0.87);
+  color: var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.87));
+  margin: 0;
+  padding: 8px 16px 0;
+  line-height: 1.5rem;
+  list-style-type: none;
+}
+
+.mdc-list--dense {
+  padding-top: 0;
+  padding-left: 0;
+  font-size: .812rem;
+}
+
+.mdc-list-item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    height: 48px;
+}
+
+.mdc-list--two-line .mdc-list-item {
+    height: 72px;
+}
+
+.mdc-list--two-line.mdc-list--dense .mdc-list-item {
+    height: 60px;
+}
+
+.mdc-list-item__text {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.mdc-list-item__text__secondary {
+    font-family: Roboto, sans-serif;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    line-height: 1.25rem;
+    color: rgba(0, 0, 0, 0.54);
+    color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.54));
+}
+
+.mdc-list--dense .mdc-list-item__text__secondary {
+    font-size: inherit;
+}
+.mdc-list--dense .mdc-list-item {
+    height: 40px;
+}
+
+.modifier-title, .modifier-text {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-size: .812rem;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: rgba(0, 0, 0, 0.87);
+    margin: 0;
+    padding: 8px 16px 0;
+    line-height: 1.5rem;
+    list-style-type: none;
+}
+
+.modifier-text {
+    font-family: Roboto, sans-serif;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-size: 0.812rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    line-height: 1.25rem;
+    color: rgba(0, 0, 0, 0.54);
+    }
 
 /*
  When combined with the effect-field-wrap and effect-input classes,
  produces layout where the remove button floats to the right as far
  as possible, while the effect component sits to the left and takes
  up the remainder of the line. Example:
-
- <div>
-   <!-- the following component will be right-justified -->
-   <material-fab raised='true' mini class='remove-btn'>
-     <glyph icon='remove'></glyph>
-   </material-fab>
-
-   <!-- this div will sets up the proper spacing and overflow for the component -->
-   <div class='effect-field-wrap'>
-
-     <!-- this component will be left-justified and take up all
-          the room not being used by the right-justified compoent -->
-     <material-input class='effect-input' type='text' [(ngModel)]='strings[i]'></material-input>
-   </div>
- </div>
 */
-.remove-btn {
+.remove-btn, .add-btn {
     float: right;
     margin-left: 10px;
     color: red;
 }
 
+.add-btn {
+    color: green;
+}
+
 /* put this class in a div that surrounds the component */
-.effect-field-wrap {
+.my-field-wrap {
     overflow: hidden;
     /* in some cases the padding and border of the input need to be cleared with this: */
     padding-right: 12px; /* 5 + 5 + 1 + 1 */
 }
 
 /* apply this class to the component */
-.effect-input {
+.my-field {
     width: 100%;
-    padding: 0 5px;
+    padding: 10px 5px;
 }
