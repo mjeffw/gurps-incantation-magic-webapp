@@ -37,25 +37,4 @@
     </material-expansionpanel>
   </material-expansionpanel-set>
 
-    <div group>
-      <div label>Ritual Modifiers</div>
-      <material-list-item *ngFor='let item of modifiers; let i = index'>
-
-        <div class='mdc-list mdc-list--two-line mdc-list--dense'>
-          <div class='mdc-list-item'>
-            <span class="mdc-list-item__text">{{item['name']}}<span class="mdc-list-item__text__secondary">{{item['descr']}}</span></span>
-          </div>
-        </div>
-        <material-button icon class='material-list-item-secondary'>
-          <glyph icon='remove_circle' class='remove-button'></glyph>
-        </material-button>
-        <material-button icon class='material-list-item-secondary'>
-          <glyph icon='remove_circle' class='remove-button'></glyph>
-        </material-button>
-      </material-list-item>
-      <material-list-item>
-        <material-button class='insert-button'>ADD EFFECT</material-button>
-      </material-list-item>
-    </div>
-  </material-list>
 </div>

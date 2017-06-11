@@ -3,46 +3,53 @@
                   floatingLabel
                   required='true'
                   class='title'
-                  [(ngModel)]='name'>
+                  [(ngModel)]='spell.name'>
   </material-input>
 </div>
+
 <div>
+  <!-- Spell Effects table -->
   <div class="my-field-wrap">
     <material-button icon class="add-btn material-list-item-secondary"><glyph icon="add_circle"></glyph></material-button>
     <div class='my-field subheading'>EFFECTS</div>
   </div>
   <material-list>
-    <material-list-item *ngFor='let item of strings; let i = index'>
+    <material-list-item *ngFor='let item of spell.effects; let i = index'>
           <material-dropdown-select [options]='effectList'
-            [buttonText]='spell.effects[i].effect.name'
+            [buttonText]='item.effect.name'
             [selection]='effectSelectModel'>
           </material-dropdown-select>
         <material-dropdown-select [options]='pathList'
-            [buttonText]='singleSelectPathLabel'
+            [buttonText]='item.path.name'
             [selection]='pathSelectModel'></material-dropdown-select>
         <material-button icon class='material-list-item-secondary'>
           <glyph icon='remove_circle' class='remove-button'></glyph>
         </material-button>
       </material-list-item>
   </material-list>
-  </div>
+</div>
+
 <div>
+  <!-- Modifier table -->
   <div class="my-field-wrap">
     <material-button icon class="add-btn material-list-item-secondary"><glyph icon="add_circle"></glyph></material-button>
     <div class='my-field subheading'>MODIFIERS</div>
   </div>
-  <material-expansionpanel flat *ngFor='let item of modifiers; let i = index'>
-    <div name class="nameClass">{{item['name']}}</div>
-    <div value class="valueClass modifier-text">{{item['descr']}}</div>
+  <material-expansionpanel flat *ngFor='let item of modifierDetails; let i = index'>
+    <div name class="nameClass">{{item.name}}</div>
+    <div value class="valueClass modifier-text">{{item.typicalText}}</div>
     <my-component></my-component>
   </material-expansionpanel>
 </div>
+
 <div>
+  <!-- Modifier table -->
   <material-input multiline
                   rows="4"
                   floatingLabel
                   label="DESCRIPTION"
-                  class="description">
+                  class="description"
+                  [(ngModel)]='spell.description'>
   </material-input>
   <!--</div>-->
 </div>
