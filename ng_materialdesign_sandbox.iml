@@ -2,7 +2,12 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$/../gurps-incantation-magic-dart" />
+    <content url="file://$MODULE_DIR$/../gurps-incantation-magic-dart">
+      <excludeFolder url="file://$MODULE_DIR$/../gurps-incantation-magic-dart/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/../gurps-incantation-magic-dart/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../gurps-incantation-magic-dart/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../gurps-incantation-magic-dart/test/packages" />
+    </content>
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
