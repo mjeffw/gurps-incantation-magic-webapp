@@ -10,22 +10,27 @@
 <div>
   <!-- Spell Effects table -->
   <div class="my-field-wrap">
-    <material-button icon class="add-btn material-list-item-secondary"><glyph icon="add_circle"></glyph></material-button>
+    <material-button icon class="add-btn material-list-item-secondary" (trigger)="addEffect()">
+      <glyph icon="add_circle"></glyph>
+    </material-button>
     <div class='my-field subheading'>EFFECTS</div>
   </div>
   <material-list>
     <material-list-item *ngFor='let item of spell.effects; let i = index'>
-          <material-dropdown-select [options]='effectList'
-            [buttonText]='item.effect.name'
-            [selection]='effectSelectModel'>
-          </material-dropdown-select>
-        <material-dropdown-select [options]='pathList'
+      <material-dropdown-select
+              [options]='effectList'
+              [buttonText]='item.effect.name'
+              [selection]='effectSelectModels[i]'>
+      </material-dropdown-select>
+      <material-dropdown-select
+            [options]='pathList'
             [buttonText]='item.path.name'
-            [selection]='pathSelectModel'></material-dropdown-select>
-        <material-button icon class='material-list-item-secondary'>
-          <glyph icon='remove_circle' class='remove-button'></glyph>
-        </material-button>
-      </material-list-item>
+            [selection]='pathSelectModels[i]'>
+      </material-dropdown-select>
+      <material-button icon class='material-list-item-secondary' (trigger)="removeEffect(i)">
+        <glyph icon='remove_circle' class='remove-button'></glyph>
+      </material-button>
+    </material-list-item>
   </material-list>
 </div>
 
