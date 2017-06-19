@@ -1,11 +1,10 @@
 // Copyright (c) 2017, jeff. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-import 'dart:async';
 import 'package:angular2/angular2.dart';
 import 'package:angular_components/angular_components.dart';
 import "package:gurps_incantation_magic_model/incantation_magic.dart";
-import 'package:observable/src/records.dart';
+import 'package:ng_materialdesign_sandbox/spell_effect_editor_component.dart';
 
 // AngularDart info: https://webdev.dartlang.org/angular
 // Components info: https://webdev.dartlang.org/components
@@ -14,9 +13,7 @@ import 'package:observable/src/records.dart';
   selector: 'my-app',
   styleUrls: const ['app_component.css'],
   templateUrl: 'app_component.html',
-  // ignore: strong_mode_implicit_dynamic_list_literal
-  directives: const [CORE_DIRECTIVES, materialDirectives],
-  // ignore: strong_mode_implicit_dynamic_list_literal
+  directives: const [CORE_DIRECTIVES, materialDirectives, SpellEffectEditorComponent], // ignore: strong_mode_implicit_dynamic_list_literal
   providers: const [materialProviders],
 )
 class AppComponent {
@@ -38,7 +35,6 @@ class AppComponent {
     spell.addRitualModifier(new DurationMod(value: new GurpsDuration(hours: 12).inSeconds));
     spell.addRitualModifier(new SubjectWeight(value: 100));
     spell.description = _description;
-    _fillOutSpellEffectModelLists();
     return spell;
   }
 
@@ -50,58 +46,7 @@ class AppComponent {
     return _spell;
   }
 
-  // == Effect add/remove button support ==
-  void addEffect() {
-    SpellEffect e = new SpellEffect(Effect.Sense, Path.Arcanum);
-    _createSelectionModels(e);
-    _spell.addEffect(e);
-  }
-
-  void removeEffect(int index) {
-    effectSelectModels.removeAt(index);
-    _spell.removeEffect(index);
-  }
-
-  // == Effect dropdown select support ==
-  SelectionOptions<Effect> effectList = new SelectionOptions.fromList(Effect.values);
-
-  final List<SelectionModel<Effect>> effectSelectModels = [];
-
-  void _changeEffectSelection(SelectionChangeRecord<Effect> item, SpellEffect effect, int index) {
-    _spell.effects[index].effect = item.added.first;
-  }
-
-  // == Path dropdown select support ==
-  SelectionOptions<Path> pathList = new SelectionOptions.fromList(Path.values);
-
-  final List<SelectionModel<Path>> pathSelectModels = [];
-
-  void _changePathSelection(SelectionChangeRecord<Path> item, SpellEffect e, int index) {
-    _spell.effects[index].path = item.added.first;
-  }
-
-  // build the path and effect selection models
-  void _fillOutSpellEffectModelLists() {
-    pathSelectModels.clear();
-    effectSelectModels.clear();
-    _spell.effects.forEach((e) => _createSelectionModels(e));
-  }
-
-  void _createSelectionModels(SpellEffect e) {
-    SelectionModel<Effect> effectSelectionModel = new SelectionModel.withList(selectedValues: [e.effect]);
-    effectSelectionModel.selectionChanges.listen((list) {
-      list.forEach((r) => _changeEffectSelection(r, e, effectSelectModels.indexOf(effectSelectionModel)));
-    });
-    effectSelectModels.add(effectSelectionModel);
-
-    SelectionModel<Path> pathSelectionModel = new SelectionModel.withList(selectedValues: [e.path]);
-    pathSelectionModel.selectionChanges.listen((list){
-      list.forEach((r) => _changePathSelection(r, e, _spell.effects.indexOf(e)));
-    });
-    pathSelectModels.add(pathSelectionModel);
-  }
-
-
+  void addModifier() {}
 
   List<ModifierDetail> get modifierDetails => _spell.export(new TextSpellExporter()).modifierExporter.details;
 }

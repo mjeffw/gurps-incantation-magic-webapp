@@ -8,52 +8,31 @@
 </div>
 
 <div>
-  <!-- Spell Effects table -->
-  <div class="my-field-wrap">
-    <material-button icon class="add-btn material-list-item-secondary" (trigger)="addEffect()">
-      <glyph icon="add_circle"></glyph>
-    </material-button>
-    <div class='my-field subheading'>EFFECTS</div>
-  </div>
-  <material-list>
-    <material-list-item *ngFor='let item of spell.effects; let i = index'>
-      <material-dropdown-select
-              [options]='effectList'
-              [buttonText]='item.effect.name'
-              [selection]='effectSelectModels[i]'>
-      </material-dropdown-select>
-      <material-dropdown-select
-            [options]='pathList'
-            [buttonText]='item.path.name'
-            [selection]='pathSelectModels[i]'>
-      </material-dropdown-select>
-      <material-button icon class='material-list-item-secondary' (trigger)="removeEffect(i)">
-        <glyph icon='remove_circle' class='remove-button'></glyph>
-      </material-button>
-    </material-list-item>
-  </material-list>
+  <spell-effect-editor [effects]='spell.effects'></spell-effect-editor>
 </div>
 
 <div>
   <!-- Modifier table -->
-  <div class="my-field-wrap">
-    <material-button icon class="add-btn material-list-item-secondary"><glyph icon="add_circle"></glyph></material-button>
+  <div class='my-field-wrap'>
+    <material-button icon class='add-btn material-list-item-secondary' (trigger)='addModifier()'>
+      <glyph icon='add_circle'></glyph>
+    </material-button>
     <div class='my-field subheading'>MODIFIERS</div>
   </div>
   <material-expansionpanel flat *ngFor='let item of modifierDetails; let i = index'>
-    <div name class="nameClass">{{item.name}}</div>
-    <div value class="valueClass modifier-text">{{item.typicalText}}</div>
+    <div name class='nameClass'>{{item.name}}</div>
+    <div value class='valueClass modifier-text'>{{item.typicalText}}</div>
     <my-component></my-component>
   </material-expansionpanel>
 </div>
 
 <div>
-  <!-- Modifier table -->
+  <!-- description -->
   <material-input multiline
-                  rows="4"
+                  rows='4'
                   floatingLabel
-                  label="DESCRIPTION"
-                  class="description"
+                  label='DESCRIPTION'
+                  class='description'
                   [(ngModel)]='spell.description'>
   </material-input>
   <!--</div>-->
