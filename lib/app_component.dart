@@ -4,7 +4,8 @@
 import 'package:angular2/angular2.dart';
 import 'package:angular_components/angular_components.dart';
 import "package:gurps_incantation_magic_model/incantation_magic.dart";
-import 'package:ng_materialdesign_sandbox/spell_effect_editor_component.dart';
+import 'effect_editor_component.dart';
+import 'modifier_editor_component.dart';
 
 // AngularDart info: https://webdev.dartlang.org/angular
 // Components info: https://webdev.dartlang.org/components
@@ -13,8 +14,9 @@ import 'package:ng_materialdesign_sandbox/spell_effect_editor_component.dart';
   selector: 'my-app',
   styleUrls: const ['app_component.css'],
   templateUrl: 'app_component.html',
-  directives: const [CORE_DIRECTIVES, materialDirectives, SpellEffectEditorComponent], // ignore: strong_mode_implicit_dynamic_list_literal
-  providers: const [materialProviders],
+  // ignore: strong_mode_implicit_dynamic_list_literal
+  directives: const [CORE_DIRECTIVES, materialDirectives, SpellEffectEditorComponent, ModifierEditorComponent],
+  providers: const [materialProviders], // ignore: strong_mode_implicit_dynamic_list_literal
 )
 class AppComponent {
   Spell _spell;
@@ -46,7 +48,7 @@ class AppComponent {
     return _spell;
   }
 
-  void addModifier() {}
-
-  List<ModifierDetail> get modifierDetails => _spell.export(new TextSpellExporter()).modifierExporter.details;
+  void removeModifier(int index) {
+    spell.ritualModifiers.removeAt(index);
+  }
 }

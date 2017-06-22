@@ -1,5 +1,5 @@
-import 'package:angular2/angular2.dart';
 import 'package:angular_components/angular_components.dart';
+import 'package:angular2/angular2.dart';
 import 'package:gurps_incantation_magic_model/incantation_magic.dart';
 
 @Component(
@@ -8,11 +8,11 @@ import 'package:gurps_incantation_magic_model/incantation_magic.dart';
   directives: const [CORE_DIRECTIVES, materialDirectives], // ignore: strong_mode_implicit_dynamic_list_literal
   template: '''
       <!-- Spell Effects table -->
-      <div class='my-field-wrap'>
+      <div class='left-component-wrap'>
         <material-button icon class='add-btn material-list-item-secondary' (trigger)='addEffect()'>
           <glyph icon='add_circle'></glyph>
         </material-button>
-        <div class='my-field subheading'>EFFECTS</div>
+        <div class='left-component subheading'>EFFECTS</div>
       </div>
       <material-list>
         <material-list-item *ngFor='let item of effects; let i = index'>

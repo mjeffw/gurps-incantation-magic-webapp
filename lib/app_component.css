@@ -10,6 +10,7 @@
 
 .description {
     width: 100%;
+    font-size: .812rem;
 }
 
 .subheading {
@@ -131,17 +132,37 @@
     letter-spacing: 0.04em;
     line-height: 1.25rem;
     color: rgba(0, 0, 0, 0.54);
-    }
+}
+
+.icon-signifier {
+  padding-right: 0;
+  padding-left: 0;
+  padding-top: 16px;
+}
+.left-spinner-btn {
+    margin-rightt: 10px;
+}
+
+.right-spinner-btn {
+    margin-left: 10px;
+}
+
+.invisible {
+  visibility: hidden;
+}
 
 /*
- When combined with the effect-field-wrap and effect-input classes,
+ When combined with the left-component-wrap and left-component classes,
  produces layout where the remove button floats to the right as far
  as possible, while the effect component sits to the left and takes
- up the remainder of the line. Example:
+ up the remainder of the line.
 */
-.remove-btn, .add-btn {
+.remove-btn, .add-btn, .right-component {
     float: right;
     margin-left: 10px;
+}
+
+.remove-btn {
     color: red;
 }
 
@@ -150,14 +171,14 @@
 }
 
 /* put this class in a div that surrounds the component */
-.my-field-wrap {
+.left-component-wrap {
     overflow: hidden;
     /* in some cases the padding and border of the input need to be cleared with this: */
     padding-right: 12px; /* 5 + 5 + 1 + 1 */
 }
 
 /* apply this class to the component */
-.my-field {
+.left-component {
     width: 100%;
     padding: 10px 5px;
 }

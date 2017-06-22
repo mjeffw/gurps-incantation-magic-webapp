@@ -1,9 +1,5 @@
 <div>
-  <material-input label='SPELL NAME'
-                  floatingLabel
-                  required='true'
-                  class='title'
-                  [(ngModel)]='spell.name'>
+  <material-input label='SPELL NAME' floatingLabel required='true' class='title' [(ngModel)]='spell.name'>
   </material-input>
 </div>
 
@@ -12,18 +8,15 @@
 </div>
 
 <div>
-  <!-- Modifier table -->
-  <div class='my-field-wrap'>
+  <div class='left-component-wrap'>
     <material-button icon class='add-btn material-list-item-secondary' (trigger)='addModifier()'>
       <glyph icon='add_circle'></glyph>
     </material-button>
-    <div class='my-field subheading'>MODIFIERS</div>
+    <div class='left-component subheading'>MODIFIERS</div>
   </div>
-  <material-expansionpanel flat *ngFor='let item of modifierDetails; let i = index'>
-    <div name class='nameClass'>{{item.name}}</div>
-    <div value class='valueClass modifier-text'>{{item.typicalText}}</div>
-    <my-component></my-component>
-  </material-expansionpanel>
+  <div *ngFor='let item of spell.ritualModifiers; let i = index'>
+    <simple-modifier-editor [modifier]='item' [index]='i' [removeFunction]="removeModifier"></simple-modifier-editor>
+  </div>
 </div>
 
 <div>
