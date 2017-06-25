@@ -48,6 +48,9 @@ class AppComponent {
     return _spell;
   }
 
+  void addModifier() {
+  }
+
   void removeModifier(int index) {
     spell.ritualModifiers.removeAt(index);
   }
