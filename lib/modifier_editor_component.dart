@@ -17,9 +17,6 @@ class ModifierEditorComponent {
   @Input()
   int index;
 
-  @Input()
-  Function removeModifierFn;
-
   RitualModifier _modifier;
   ModifierDetail detail = new WebModifierDetail();
 
@@ -34,6 +31,12 @@ class ModifierEditorComponent {
   }
 
   void incrementValue() {
+    _modifier.incrementValue();
+    // TODO _modifier.spellPoints++;
+  }
+
+  void decrementValue() {
+    _modifier.decrementValue();
     // TODO _modifier.spellPoints++;
   }
 }
