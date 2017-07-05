@@ -32,12 +32,19 @@ class ModifierEditorComponent {
 
   void incrementValue() {
     _modifier.incrementValue();
-    // TODO _modifier.spellPoints++;
+    _modifier.exportDetail(detail);
   }
 
   void decrementValue() {
     _modifier.decrementValue();
-    // TODO _modifier.spellPoints++;
+    _modifier.exportDetail(detail);
+  }
+
+  bool get inherent => (detail as WebModifierDetail).inherent;
+
+  set inherent(bool value) {
+    _modifier.inherent = value;
+    _modifier.exportDetail(detail);
   }
 }
 
