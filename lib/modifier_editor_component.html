@@ -1,21 +1,21 @@
 <material-expansionpanel flat [showSaveCancel]='false'>
-  <div name class='nameClass'>{{detail.name}}</div>
+  <div name class='nameClass'>{{exporter.detail.name}}</div>
   <div value class='valueClass left-component-wrap'>
     <span class='left-component'>
-      <div class='modifier-text' [ngClass]="{ invisible: !detail.inherent }">
+      <div class='modifier-text' [ngClass]="{ invisible: !exporter.detail.inherent }">
         <glyph size="medium" icon='check_circle'></glyph>
       </div>
-      <div class='modifier-text'>{{detail.typicalText}} ({{detail.spellPoints}})</div>
+      <div class='modifier-text'>{{exporter.detail.typicalText}} ({{exporter.detail.spellPoints}})</div>
     </span>
   </div>
-  <span [ngSwitch]="detail.type">
+  <span [ngSwitch]="exporter.detail.type">
     <div *ngSwitchCase="'Simple'">
       <div class='left-component-wrap'>
         <span class='left-component'>
           <material-button icon (trigger)='incrementValue()'><glyph icon='add_circle'></glyph></material-button>
           <material-button icon (trigger)='decrementValue()'><glyph icon='remove_circle'></glyph></material-button>
-          <span class='mdc-list-item__text'>{{detail.spellPoints}} SP
-            <span class='mdc-list-item__text__secondary'>{{detail.typicalText}}</span>
+          <span class='mdc-list-item__text'>{{exporter.detail.spellPoints}} SP
+            <span class='mdc-list-item__text__secondary'>{{exporter.detail.typicalText}}</span>
           </span>
           <material-button icon class='remove-btn' (trigger)='removeModifier'>
             <glyph icon='remove_circle'></glyph>

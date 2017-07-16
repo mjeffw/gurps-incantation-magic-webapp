@@ -24,18 +24,16 @@ class AppComponent {
   Spell createSpell() {
     _spell = new Spell();
     String _description =
-        'This spell gives any inanimate object the ability move, and to understand and follow simple commands. '
-        'It has DX equal to your Path level-5, Move equal to Path/3 (round down), and ST/HP based on its weight '
-        '(see p. B558). It has whatever skills (equal to your Path of Arcanum level) and advantages the GM '
-        'thinks are appropriate to an object of its shape or purpose. For example, if a caster had Path of '
-        'Arcanum-15 and he animated a 3 lb. broom, it might have ST/HP 12, DX 10, Move 5, and Housekeeping-15. '
-        'Many casters will customize this spell, using Bestows a Bonus (p. 15) to give higher skills or '
-        'attributes. Botches usually produce an animated object with creative and hostile intent!';
-    spell.name = "Animate Object";
-    spell.addEffect(new SpellEffect(Effect.Create, Path.Arcanum));
-    spell.addEffect(new SpellEffect(Effect.Control, Path.Arcanum));
-    spell.addRitualModifier(new DurationMod(value: new GurpsDuration(hours: 12).inSeconds));
-    spell.addRitualModifier(new SubjectWeight(value: 100));
+        "This spell holds the subject (who must have an IQ of 6 or higher) motionless and unaware of time's "
+        "passage (treat as dazed, p. B428). The subject may roll against the better of HT or Will to 'shake "
+        "off' the effect every (margin of loss) minutes. Otherwise, this lasts as long as the caster and the "
+        "subject's eyes meet; if either one can no longer see the other's eyes, the spell is instantly broken. "
+        "(The short casting time is due to this drawback; see Limited Spells, p. 15.) This is often cast as a "
+        "'blocking' spell (p. 20) at the usual -10 to skill.";
+    spell.name = 'Bewitchment';
+    spell.addEffect(new SpellEffect(Effect.Destroy, Path.Mesmerism));
+    spell.addDrawback("Requires eye contact", null, -40);
+    spell.addRitualModifier(new Affliction("Daze", value: 50, inherent: true));
     spell.description = _description;
     return spell;
   }

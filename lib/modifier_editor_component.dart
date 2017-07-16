@@ -1,7 +1,7 @@
 import 'package:angular_components/angular_components.dart';
 import 'package:angular2/angular2.dart';
 import 'package:gurps_incantation_magic_model/incantation_magic.dart';
-import 'package:gurps_incantation_magic_model/units/gurps_duration.dart';
+import 'exporter/web_exporter.dart';
 
 @Component(
   selector: 'simple-modifier-editor',
@@ -18,12 +18,13 @@ class ModifierEditorComponent {
   int index;
 
   RitualModifier _modifier;
-  ModifierDetail detail = new WebModifierDetail();
+  WebModifierExporter exporter = new WebModifierExporter();
+  //  ModifierDetail detail = new WebModifierDetail();
 
   @Input()
   set modifier(RitualModifier mod) {
     _modifier = mod;
-    _modifier.exportDetail(detail);
+    _modifier.export(exporter);
   }
 
   void removeModifier() {
@@ -31,39 +32,19 @@ class ModifierEditorComponent {
   }
 
   void incrementValue() {
-    _modifier.incrementValue();
-    _modifier.exportDetail(detail);
+    _modifier.incrementSpellPoints();
+    _modifier.export(exporter);
   }
 
   void decrementValue() {
-    _modifier.decrementValue();
-    _modifier.exportDetail(detail);
+    _modifier.decrementSpellPoints();
+    _modifier.export(exporter);
   }
 
-  bool get inherent => (detail as WebModifierDetail).inherent;
+  bool get inherent => exporter.detail.inherent;
 
   set inherent(bool value) {
     _modifier.inherent = value;
-    _modifier.exportDetail(detail);
-  }
-}
-
-class WebModifierDetail extends ModifierDetail {
-  String type = 'Simple';
-  String name;
-  int spellPoints;
-  bool inherent;
-  GurpsDuration _duration;
-
-  // TODO: implement summaryText
-  @override
-  String get summaryText => null;
-
-  @override
-  String get typicalText => _duration.toFormattedString();
-
-  @override
-  set value(int value) {
-    _duration = new GurpsDuration(seconds: value);
+    _modifier.export(exporter);
   }
 }
