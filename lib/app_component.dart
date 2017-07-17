@@ -23,18 +23,11 @@ class AppComponent {
 
   Spell createSpell() {
     _spell = new Spell();
-    String _description =
-        "This spell holds the subject (who must have an IQ of 6 or higher) motionless and unaware of time's "
-        "passage (treat as dazed, p. B428). The subject may roll against the better of HT or Will to 'shake "
-        "off' the effect every (margin of loss) minutes. Otherwise, this lasts as long as the caster and the "
-        "subject's eyes meet; if either one can no longer see the other's eyes, the spell is instantly broken. "
-        "(The short casting time is due to this drawback; see Limited Spells, p. 15.) This is often cast as a "
-        "'blocking' spell (p. 20) at the usual -10 to skill.";
-    spell.name = 'Bewitchment';
-    spell.addEffect(new SpellEffect(Effect.Destroy, Path.Mesmerism));
-    spell.addDrawback("Requires eye contact", null, -40);
-    spell.addRitualModifier(new Affliction("Daze", value: 50, inherent: true));
-    spell.description = _description;
+    spell.name = 'Lesser Solidify Spirit';
+    spell.addEffect(new SpellEffect(Effect.Control, Path.Necromancy));
+    spell.addEffect(new SpellEffect(Effect.Strengthen, Path.Necromancy));
+    spell.addRitualModifier(new DurationMod(value: 720));
+    spell.addRitualModifier(new RangeDimensional(value: 1));
     return spell;
   }
 

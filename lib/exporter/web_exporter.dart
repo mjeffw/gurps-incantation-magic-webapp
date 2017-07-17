@@ -11,8 +11,9 @@ class WebModifierExporter implements ModifierExporter {
     this.detail = detail as WebModifierDetail;
   }
 
+  // TODO: implement createAlteredTraitsDetail
   @override
-  ModifierDetail createAfflictionDetail() => new WebAfflictionDetail();
+  ModifierDetail createAfflictionDetail() => null;
 
   @override
   ModifierDetail createAfflictionStunDetail() {
@@ -53,9 +54,7 @@ class WebModifierExporter implements ModifierExporter {
   }
 
   @override
-  ModifierDetail createRangeDimensionalDetail() {
-    // TODO: implement createRangeDimensionalDetail
-  }
+  ModifierDetail createRangeDimensionalDetail() => new RangeDimensionalModifierDetail();
 
   @override
   ModifierDetail createRangeInformationalDetail() {
@@ -81,9 +80,7 @@ class WebModifierExporter implements ModifierExporter {
   ModifierDetail createSubjectWeightDetail() => new WeightModifierDetail();
 
   @override
-  ModifierDetail createSummonedDetail() {
-    // TODO: implement createSummonedDetail
-  }
+  ModifierDetail createSummonedDetail() => new SummonedModifierDetail();
 
   // TODO: implement details
   @override
@@ -116,6 +113,16 @@ class WebAfflictionDetail extends WebModifierDetail implements AfflictionDetail 
 class DurationModifierDetail extends WebModifierDetail {
   @override
   String get typicalText => (value == 0) ? "Momentary" : GurpsDuration.toFormattedString(value);
+}
+
+class RangeDimensionalModifierDetail extends WebModifierDetail {
+  @override
+  String get typicalText => "${value} dimension${value > 1 ? 's' : ''}";
+}
+
+class SummonedModifierDetail extends WebModifierDetail {
+  @override
+  String get typicalText => "${value}% of Static Point Total";
 }
 
 class WeightModifierDetail extends WebModifierDetail {
