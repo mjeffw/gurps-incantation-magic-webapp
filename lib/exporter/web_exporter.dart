@@ -44,22 +44,16 @@ class WebModifierExporter implements ModifierExporter {
   ModifierDetail createDurationDetail() => new DurationModifierDetail();
 
   @override
-  ModifierDetail createGirdedDetail() {
-    // TODO: implement createGirdedDetail
-  }
+  ModifierDetail createGirdedDetail() => new GirdedModifierDetail();
 
   @override
-  ModifierDetail createRangeDetail() {
-    // TODO: implement createRangeDetail
-  }
+  ModifierDetail createRangeDetail() => new RangeModifierDetail();
 
   @override
   ModifierDetail createRangeDimensionalDetail() => new RangeDimensionalModifierDetail();
 
   @override
-  ModifierDetail createRangeInformationalDetail() {
-    // TODO: implement createRangeInformationalDetail
-  }
+  ModifierDetail createRangeInformationalDetail() => new RangeInformationalModifierDetail();
 
   @override
   ModifierDetail createRangeTimeDetail() {
@@ -72,9 +66,7 @@ class WebModifierExporter implements ModifierExporter {
   }
 
   @override
-  ModifierDetail createSpeedDetail() {
-    // TODO: implement createSpeedDetail
-  }
+  ModifierDetail createSpeedDetail() => new SpeedModifierDetail();
 
   @override
   ModifierDetail createSubjectWeightDetail() => new WeightModifierDetail();
@@ -115,9 +107,29 @@ class DurationModifierDetail extends WebModifierDetail {
   String get typicalText => (value == 0) ? "Momentary" : GurpsDuration.toFormattedString(value);
 }
 
+class GirdedModifierDetail extends WebModifierDetail {
+  @override
+  String get typicalText => '${value} spell points';
+}
+
+class RangeModifierDetail extends WebModifierDetail {
+  @override
+  String get typicalText => "${value} yards";
+}
+
 class RangeDimensionalModifierDetail extends WebModifierDetail {
   @override
   String get typicalText => "${value} dimension${value > 1 ? 's' : ''}";
+}
+
+class RangeInformationalModifierDetail extends WebModifierDetail {
+  @override
+  String get typicalText => GurpsDistance.toFormattedString(value);
+}
+
+class SpeedModifierDetail extends WebModifierDetail {
+  @override
+  String get typicalText => "${GurpsDistance.toFormattedString(value)} yards per second";
 }
 
 class SummonedModifierDetail extends WebModifierDetail {

@@ -23,11 +23,11 @@ class AppComponent {
 
   Spell createSpell() {
     _spell = new Spell();
-    spell.name = 'Lesser Solidify Spirit';
-    spell.addEffect(new SpellEffect(Effect.Control, Path.Necromancy));
-    spell.addEffect(new SpellEffect(Effect.Strengthen, Path.Necromancy));
-    spell.addRitualModifier(new DurationMod(value: 720));
-    spell.addRitualModifier(new RangeDimensional(value: 1));
+    spell.name = 'Scry';
+    spell.addEffect(new SpellEffect(Effect.Strengthen, Path.Augury));
+    spell.addRitualModifier(new Speed(value: 20000, inherent: true));
+    spell.addRitualModifier(new DurationMod(value: 10800));
+    spell.addRitualModifier(new RangeInformational(value: 200000));
     return spell;
   }
 
