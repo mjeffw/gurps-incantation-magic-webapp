@@ -124,12 +124,12 @@ class RangeDimensionalModifierDetail extends WebModifierDetail {
 
 class RangeInformationalModifierDetail extends WebModifierDetail {
   @override
-  String get typicalText => GurpsDistance.toFormattedString(value);
+  String get typicalText => (value == 880) ? '1/2 mile' : GurpsDistance.toFormattedString(value);
 }
 
 class SpeedModifierDetail extends WebModifierDetail {
   @override
-  String get typicalText => "${GurpsDistance.toFormattedString(value)} yards per second";
+  String get typicalText => "${GurpsDistance.toFormattedString(value, showFraction: true)}/second";
 }
 
 class SummonedModifierDetail extends WebModifierDetail {
