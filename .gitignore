@@ -7,3 +7,12 @@ pubspec.lock
 
 # Directory created by dartdoc
 doc/api/
+.DS_Store
+.idea/codeStyleSettings.xml
+.idea/libraries/Dart_Packages.xml
+.idea/libraries/Dart_SDK.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/ng_materialdesign_sandbox.iml
+.idea/vcs.xml
+.idea/workspace.xml
