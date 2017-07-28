@@ -35,10 +35,16 @@ class AppComponent {
         "a lava-swim.";
     spell.name = 'Bond of Servitude for (Demons)';
     spell.addEffect(new SpellEffect(Effect.Control, Path.Demonology));
-    spell.addRitualModifier(
-        new Bestows("Resistance to Bond of Servitude", range: BestowsRange.single, value: -2, inherent: true));
+    spell.addRitualModifier(new Girded(value: 10));
     spell.addRitualModifier(new DurationMod(value: new GurpsDuration(hours: 1).inSeconds));
     spell.addRitualModifier(new Range(value: 20));
+    spell.addRitualModifier(new RangeDimensional(value: 2));
+    spell.addRitualModifier(new RangeInformational(value: 20));
+    spell.addRitualModifier(new Speed(value: 20));
+    spell.addRitualModifier(new SubjectWeight(value: 20));
+    spell.addRitualModifier(new Summoned(value: 50));
+    spell.addRitualModifier(new RangeCrossTime(value: 12));
+    spell.addRitualModifier(new Affliction("specialization", value: 12));
     spell.description = _description;
     return spell;
   }
@@ -51,8 +57,7 @@ class AppComponent {
     return _spell;
   }
 
-  void addModifier() {
-  }
+  void addModifier() {}
 
   void removeModifier(int index) {
     spell.ritualModifiers.removeAt(index);

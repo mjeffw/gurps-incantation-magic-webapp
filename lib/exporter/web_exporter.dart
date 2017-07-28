@@ -56,14 +56,11 @@ class WebModifierExporter implements ModifierExporter {
   ModifierDetail createRangeInformationalDetail() => new RangeInformationalModifierDetail();
 
   @override
-  ModifierDetail createRangeTimeDetail() {
-    // TODO: implement createRangeTimeDetail
-  }
+  ModifierDetail createRangeTimeDetail() => new RangeTimeModifierDetail();
 
+  // TODO: implement details
   @override
-  ModifierDetail createRepairDetail() {
-    // TODO: implement createRepairDetail
-  }
+  ModifierDetail createRepairDetail() => null;
 
   @override
   ModifierDetail createSpeedDetail() => new SpeedModifierDetail();
@@ -99,6 +96,9 @@ class WebAfflictionDetail extends WebModifierDetail implements AfflictionDetail 
   String specialization;
 
   @override
+  String type = 'Affliction';
+
+  @override
   String get typicalText => '${name}, ${specialization} (${value}%)';
 }
 
@@ -114,7 +114,7 @@ class GirdedModifierDetail extends WebModifierDetail {
 
 class RangeModifierDetail extends WebModifierDetail {
   @override
-  String get typicalText => "${value} yards";
+  String get typicalText => "${GurpsDistance.toFormattedString(value, showFraction: true)}";
 }
 
 class RangeDimensionalModifierDetail extends WebModifierDetail {
@@ -126,6 +126,16 @@ class RangeInformationalModifierDetail extends WebModifierDetail {
   @override
   String get typicalText => (value == 880) ? '1/2 mile' : GurpsDistance.toFormattedString(value);
 }
+
+class RangeTimeModifierDetail extends WebModifierDetail {
+  @override
+  String get typicalText => (value < 24) ? '${value} hours' : '${value ~/ 24} days';
+}
+
+//class RepairModifierDetail extends WebModifierDetail {
+//  @override
+//  String get typicalText => '${new DieRoll(1, value).toString()}';
+//}
 
 class SpeedModifierDetail extends WebModifierDetail {
   @override
