@@ -1,11 +1,11 @@
-<material-expansionpanel flat [showSaveCancel]='false'>
-  <div name class='nameClass'>{{exporter.detail.name}}</div>
+<material-expansionpanel flat [showSaveCancel]='false'
+  name="{{exporter.detail.name}}"
+  secondaryText="{{exporter.detail.typicalText}} ({{exporter.detail.spellPoints}})">
   <div value class='valueClass left-component-wrap'>
-    <span class='left-component'>
+    <span class='right-component'>
       <div class='modifier-text' [ngClass]="{ invisible: !exporter.detail.inherent }">
         <glyph size="medium" icon='check_circle'></glyph>
       </div>
-      <div class='modifier-text'>{{exporter.detail.typicalText}} ({{exporter.detail.spellPoints}})</div>
     </span>
   </div>
   <span [ngSwitch]="exporter.detail.type">
