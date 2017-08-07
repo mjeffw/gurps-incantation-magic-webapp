@@ -6,9 +6,9 @@ import 'exporter/web_exporter.dart';
 @Component(
   selector: 'simple-modifier-editor',
   styleUrls: const ['app_component.css'],
-  directives: const [COMMON_DIRECTIVES, materialDirectives], // ignore: strong_mode_implicit_dynamic_list_literal
+  directives: const <dynamic>[COMMON_DIRECTIVES, materialDirectives, materialInputDirectives],
   templateUrl: 'modifier_editor_component.html',
-  providers: const [materialProviders], // ignore: strong_mode_implicit_dynamic_list_literal
+  providers: const <dynamic>[materialProviders],
 )
 class ModifierEditorComponent {
   @Input()
@@ -17,34 +17,17 @@ class ModifierEditorComponent {
   @Input()
   int index;
 
-  RitualModifier _modifier;
-  WebModifierExporter exporter = new WebModifierExporter();
-  //  ModifierDetail detail = new WebModifierDetail();
-
   @Input()
-  set modifier(RitualModifier mod) {
-    _modifier = mod;
-    _modifier.export(exporter);
-  }
+  RitualModifier modifier;
+
 
   void removeModifier() {
     spell.ritualModifiers.removeAt(index);
   }
 
-  void incrementValue() {
-    _modifier.incrementSpellPoints();
-    _modifier.export(exporter);
-  }
-
-  void decrementValue() {
-    _modifier.decrementSpellPoints();
-    _modifier.export(exporter);
-  }
-
-  bool get inherent => exporter.detail.inherent;
-
-  set inherent(bool value) {
-    _modifier.inherent = value;
-    _modifier.export(exporter);
+  String get typicalText {
+    WebModifierExporter exporter = new WebModifierExporter();
+    modifier.export(exporter);
+    return exporter.detail.typicalText;
   }
 }

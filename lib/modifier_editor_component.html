@@ -1,27 +1,57 @@
-<material-expansionpanel flat [showSaveCancel]='false'>
-  <div name class='nameClass'>{{exporter.detail.name}}</div>
+<material-expansionpanel flat [showSaveCancel]='false'
+                         name='{{modifier.name}}'
+                         secondaryText='{{typicalText}} ({{modifier.spellPoints}})'>
   <div value class='valueClass left-component-wrap'>
-    <span class='left-component'>
-      <div class='modifier-text' [ngClass]="{ invisible: !exporter.detail.inherent }">
-        <glyph size="medium" icon='check_circle'></glyph>
+    <span class='right-component'>
+      <div class='modifier-text' [ngClass]="{ invisible: !modifier.inherent }">
+        <glyph size="large" icon='check_circle'></glyph>
       </div>
-      <div class='modifier-text'>{{exporter.detail.typicalText}} ({{exporter.detail.spellPoints}})</div>
     </span>
   </div>
-  <span [ngSwitch]="exporter.detail.type">
-    <div *ngSwitchCase="'Simple'">
-      <div class='left-component-wrap'>
-        <span class='left-component'>
-          <material-button icon (trigger)='incrementValue()'><glyph icon='add_circle'></glyph></material-button>
-          <material-button icon (trigger)='decrementValue()'><glyph icon='remove_circle'></glyph></material-button>
-          <span class='mdc-list-item__text'>{{exporter.detail.spellPoints}} SP
-            <span class='mdc-list-item__text__secondary'>{{exporter.detail.typicalText}}</span>
+  <span [ngSwitch]="modifier.name">
+
+    <div *ngSwitchDefault>
+      <div>
+        <div>
+          <material-button icon (trigger)='modifier.incrementSpellPoints()'><glyph icon='add_circle'></glyph></material-button>
+          <material-button icon (trigger)='modifier.decrementSpellPoints()'><glyph icon='remove_circle'></glyph></material-button>
+          <span style="padding-left: 10px;">{{modifier.spellPoints}} SP</span>
+          <span class="app-text-secondary" style="padding-left: 8px;">{{typicalText}}</span>
+        </div>
+        <div style='padding-top: 4px;' class='left-component-wrap'>
+          <span class='left-component'>
+            <material-toggle style="padding-top: 8px;" label="Inherent" [(checked)]='modifier.inherent'></material-toggle>
           </span>
           <material-button icon class='remove-btn' (trigger)='removeModifier'>
-            <glyph icon='remove_circle'></glyph>
+            <glyph icon='remove_circle'></glyph>Delete
           </material-button>
-          <material-toggle class="right-component" label="Inherent" [(checked)]='inherent'></material-toggle>
-        </span>
+        </div>
+      </div>
+    </div>
+
+    <div *ngSwitchCase="'Bestows a (Bonus or Penalty)'">
+      <div>
+        <div>
+          <material-button icon (trigger)='modifier.incrementSpellPoints()'><glyph icon='add_circle'></glyph></material-button>
+          <material-button icon (trigger)='modifier.decrementSpellPoints()'><glyph icon='remove_circle'></glyph></material-button>
+          <span style="padding-left: 10px;">{{modifier.spellPoints}} SP</span>
+        </div>
+        <material-dropdown-select
+            [options]='exporter.detail.rangeList'
+            [buttonText]='exporter.detail.range'
+            [selection]='exporter.detail.selectModel'>
+        </material-dropdown-select>
+
+        <material-input style="width: 100%;" label="Roll to Modify" floatingLabel="true"
+                        [(ngModel)]="modifier.specialization"></material-input>
+        <div style='padding-top: 4px;' class='left-component-wrap'>
+          <span class='left-component'>
+            <material-toggle style="padding-top: 8px;" label="Inherent" [(checked)]='modifier.inherent'></material-toggle>
+          </span>
+          <material-button icon class='remove-btn' (trigger)='removeModifier'>
+            <glyph icon='remove_circle'></glyph>Delete
+          </material-button>
+        </div>
       </div>
     </div>
   </span>

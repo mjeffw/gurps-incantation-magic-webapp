@@ -87,7 +87,7 @@
     flex-direction: column;
 }
 
-.mdc-list-item__text__secondary {
+.app-text-secondary {
     font-family: Roboto, sans-serif;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
@@ -99,7 +99,7 @@
     color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.54));
 }
 
-.mdc-list--dense .mdc-list-item__text__secondary {
+.mdc-list--dense .app-text-secondary {
     font-size: inherit;
 }
 .mdc-list--dense .mdc-list-item {

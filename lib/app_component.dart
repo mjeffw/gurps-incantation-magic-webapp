@@ -14,9 +14,8 @@ import 'modifier_editor_component.dart';
   selector: 'my-app',
   styleUrls: const ['app_component.css'],
   templateUrl: 'app_component.html',
-  // ignore: strong_mode_implicit_dynamic_list_literal
-  directives: const [CORE_DIRECTIVES, materialDirectives, SpellEffectEditorComponent, ModifierEditorComponent],
-  providers: const [materialProviders], // ignore: strong_mode_implicit_dynamic_list_literal
+  directives: const <dynamic>[CORE_DIRECTIVES, materialDirectives, SpellEffectEditorComponent, ModifierEditorComponent],
+  providers: const <dynamic>[materialProviders],
 )
 class AppComponent {
   Spell _spell;
