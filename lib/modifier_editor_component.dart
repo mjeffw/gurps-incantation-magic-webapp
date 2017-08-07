@@ -17,9 +17,19 @@ class ModifierEditorComponent {
   @Input()
   int index;
 
-  @Input()
-  RitualModifier modifier;
+  RitualModifier _modifier;
 
+  Map<String, dynamic> properties = new Map<String, dynamic>();
+
+  RitualModifier get modifier => _modifier;
+
+  @Input()
+  set modifier(RitualModifier modifier) {
+    _modifier = modifier;
+    if (modifier is Bestows) {
+      properties['bestowsSelections'] = new BestowsSelections(_modifier as Bestows);
+    }
+  }
 
   void removeModifier() {
     spell.ritualModifiers.removeAt(index);
@@ -27,7 +37,32 @@ class ModifierEditorComponent {
 
   String get typicalText {
     WebModifierExporter exporter = new WebModifierExporter();
-    modifier.export(exporter);
+    _modifier.export(exporter);
     return exporter.detail.typicalText;
+  }
+}
+
+class BestowsSelections {
+  final Map<BestowsRange, String> valueToString = {
+    BestowsRange.broad: 'Broad',
+    BestowsRange.moderate: "Moderate",
+    BestowsRange.single: "Single"
+  };
+
+  SelectionOptions<BestowsRange> rangeList = new SelectionOptions.fromList(BestowsRange.values);
+
+  Bestows _modifier;
+  BestowsSelections(this._modifier);
+
+  SelectionModel<BestowsRange> get selectionModel {
+    SelectionModel<BestowsRange> model = new SelectionModel.withList(selectedValues: [_modifier.range]);
+    model.selectionChanges.listen(onData);
+    return model;
+  }
+
+  String render(BestowsRange value) => valueToString[value];
+
+  void onData(List<SelectionChangeRecord<BestowsRange>> list) {
+    list.forEach((r) => _modifier.range = r.added.first);
   }
 }
