@@ -9,42 +9,46 @@
     </span>
   </div>
   <span [ngSwitch]="modifier.name">
-    <div>
-      <div>
-        <material-button icon (trigger)='modifier.incrementSpellPoints()'><glyph icon='add_circle'></glyph></material-button>
-        <material-button icon (trigger)='modifier.decrementSpellPoints()'><glyph icon='remove_circle'></glyph></material-button>
-        <span style="padding-left: 10px;">{{modifier.spellPoints}} SP</span>
-        <span class="app-text-secondary" style="padding-left: 8px;">{{typicalText}}</span>
-      </div>
+    <div style="padding-bottom: 12px;">
+      <material-button icon (trigger)='modifier.incrementSpellPoints()'><glyph icon='add_circle'></glyph></material-button>
+      <material-button icon (trigger)='modifier.decrementSpellPoints()'><glyph icon='remove_circle'></glyph></material-button>
+      <span style="padding-left: 10px;">{{modifier.spellPoints}} SP</span>
     </div>
 
-    <div *ngSwitchDefault>
+    <div *ngSwitchDefault></div>
+
+    <div *ngSwitchCase="'Area of Effect'">
+      <material-toggle label="{{modifier.includes ? 'Includes' : 'Excludes'}}"
+                       [(checked)]="modifier.includes"></material-toggle>
+      <div>
+        <material-button icon (trigger)='properties["areaOfEffectAdapter"].incrementTargets()'>
+          <glyph icon='add_circle'></glyph>
+        </material-button>
+        <material-button icon (trigger)='properties["areaOfEffectAdapter"].decrementTargets()'>
+          <glyph icon='remove_circle'></glyph>
+        </material-button>
+        <span style="padding-left: 10px;">{{modifier.targets}} Targets</span>
+      </div>
     </div>
 
     <div *ngSwitchCase="'Bestows a (Bonus or Penalty)'">
       <material-dropdown-select
-          [options]='properties["bestowsSelections"].rangeList'
-          [buttonText]='properties["bestowsSelections"].valueToString[modifier.range]'
-          [selection]='properties["bestowsSelections"].selectionModel'
-          [itemRenderer]='properties["bestowsSelections"].render'>
+          [options]='properties["bestowsAdapter"].rangeList'
+          [buttonText]='properties["bestowsAdapter"].valueToString[modifier.range]'
+          [selection]='properties["bestowsAdapter"].selectionModel'
+          [itemRenderer]='properties["bestowsAdapter"].render'>
       </material-dropdown-select>
-      <material-input
-          style="width: 100%;"
-          label="Roll to Modify"
-          floatingLabel="true"
-          [(ngModel)]="modifier.specialization">
+      <material-input style="width: 100%;" label="ROLL TO MODIFY" floatingLabel [(ngModel)]="modifier.specialization">
       </material-input>
     </div>
 
-    <div>
-      <div style='padding-top: 4px;' class='left-component-wrap'>
-        <span class='left-component'>
-          <material-toggle style="padding-top: 8px;" label="Inherent" [(checked)]='modifier.inherent'></material-toggle>
-        </span>
-        <material-button icon class='remove-btn' (trigger)='removeModifier'>
-          <glyph icon='remove_circle'></glyph>Delete
-        </material-button>
-      </div>
+    <div style='padding-top: 16px;' class='left-component-wrap'>
+      <span class='left-component'>
+        <material-toggle style="padding-top: 8px;" label="Inherent" [(checked)]='modifier.inherent'></material-toggle>
+      </span>
+      <material-button icon class='remove-btn' (trigger)='removeModifier'>
+        <glyph icon='remove_circle'></glyph>
+      </material-button>
     </div>
   </span>
 </material-expansionpanel>

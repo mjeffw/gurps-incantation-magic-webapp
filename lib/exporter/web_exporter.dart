@@ -1,27 +1,15 @@
 import 'package:gurps_incantation_magic_model/incantation_magic.dart';
-import 'package:angular_components/angular_components.dart';
 
 //class WebSpellExporter implements SpellExporter {
 //}
 
-class WebModifierExporter implements ModifierExporter {
+class WebModifierExporter extends TextModifierExporter {
   WebModifierDetail detail;
 
   @override
   void addDetail(ModifierDetail detail) {
     this.detail = detail as WebModifierDetail;
   }
-
-  // TODO: implement details
-  @override
-  List<ModifierDetail> get details => null;
-
-  // TODO: implement typicalText
-  @override
-  String get typicalText => null;
-
-  RitualModifier _modifier;
-  set modifier(RitualModifier modifier) => _modifier = modifier;
 
   // TODO: implement createAlteredTraitsDetail
   @override
@@ -38,12 +26,10 @@ class WebModifierExporter implements ModifierExporter {
   }
 
   @override
-  ModifierDetail createAreaEffectDetail() {
-    // TODO: implement createAreaEffectDetail
-  }
+  ModifierDetail createAreaEffectDetail() => new AreaOfEffectModifierDetail();
 
   @override
-  ModifierDetail createBestowsDetail() => new BestowsModifierDetail(this);
+  ModifierDetail createBestowsDetail() => new BestowsModifierDetail();
 
   @override
   ModifierDetail createDamageDetail() {
@@ -104,33 +90,26 @@ class WebAfflictionDetail extends WebModifierDetail implements AfflictionDetail 
   String get typicalText => '${name}, ${specialization} (${value}%)';
 }
 
+class AreaOfEffectModifierDetail extends WebModifierDetail implements AreaOfEffectDetail {
+  @override
+  bool includes;
+
+  @override
+  int targets;
+
+  @override
+  String get typicalText => 'Area of Effect, ${value} yards, ${includes ? "including" : "excluding"} ${targets} targets';
+}
+
 class BestowsModifierDetail extends WebModifierDetail implements BestowsDetail {
-  static Map<String, BestowsRange> BestowsValueMap = {
-    'Broad': BestowsRange.broad,
-    'Moderate': BestowsRange.moderate,
-    'Single': BestowsRange.single
-  };
-
-  @override
-  String type = 'Bonus';
-
-  @override
-  String specialization;
-
-  @override
-  String range;
-
-  WebModifierExporter _webModifierExporter;
-  BestowsModifierDetail(this._webModifierExporter);
-
   @override
   String get typicalText =>
       'Bestows a ${value < 0 ? "Penalty" : "Bonus"}, ${value < 0 ? "-" : "+"}${value.abs()} to ${specialization}';
+  @override
+  String range;
 
-  SelectionOptions<String> rangeList = new SelectionOptions.fromList(BestowsValueMap.keys.toList(growable: false));
-
-  // TODO must delegate changes to selection to _webModifierExporter._modifier
-  SelectionModel<BestowsRange> selectModel = new SelectionModel.withList();
+  @override
+  String specialization;
 }
 
 class DurationModifierDetail extends WebModifierDetail {

@@ -5,7 +5,7 @@ import 'package:gurps_incantation_magic_model/incantation_magic.dart';
 @Component(
   selector: 'spell-effect-editor',
   styleUrls: const ['app_component.css'],
-  directives: const [CORE_DIRECTIVES, materialDirectives], // ignore: strong_mode_implicit_dynamic_list_literal
+  directives: const <dynamic>[CORE_DIRECTIVES, materialDirectives],
   template: '''
       <!-- Spell Effects table -->
       <div class='left-component-wrap'>
@@ -32,7 +32,7 @@ import 'package:gurps_incantation_magic_model/incantation_magic.dart';
         </material-list-item>
       </material-list>
   ''',
-  providers: const [materialProviders], // ignore: strong_mode_implicit_dynamic_list_literal
+  providers: const <dynamic>[materialProviders],
 )
 class SpellEffectEditorComponent {
   List<SpellEffect> _effects;

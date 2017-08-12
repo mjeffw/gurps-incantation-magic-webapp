@@ -14,8 +14,9 @@
     </material-button>
     <div class='left-component subheading'>MODIFIERS</div>
   </div>
+
   <div *ngFor='let item of spell.ritualModifiers; let i = index'>
-    <simple-modifier-editor [modifier]='item' [index]='i'></simple-modifier-editor>
+    <modifier-editor [modifier]='item' [index]='i'></modifier-editor>
   </div>
 </div>
 

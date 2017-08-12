@@ -22,22 +22,23 @@ class AppComponent {
 
   Spell createSpell() {
     _spell = new Spell();
-    String _description =
-        "This spell imposes a magical compulsion on the target (who resists at -2), forcing him to obey all the "
-        "caster's commands for an hour. The target cannot go against a direct command, but may interpret "
-        "commands creatively. This spell doesn't provide any special means of communication or understanding of "
-        "commands. If the subject is ordered to do something suicidal or radically against his nature (e.g., "
-        "attack a co-religionist to whom he has a Sense of Duty) he gets a roll to resist that command by "
-        "rolling Will vs. the caster's effective skill. The caster may not repeat a resisted order, even "
-        "rephrased, if the outcome would be similar! Different orders are still possible; e.g., if \"Throw your "
-        "friend in the lava\" fails, \"Make your friend leave\" may still work, so long as leaving doesn't require "
-        "a lava-swim.";
-    spell.name = 'Bond of Servitude for (Demons)';
-    spell.addEffect(new SpellEffect(Effect.Control, Path.Demonology));
-    spell.addRitualModifier(new Bestows("Rolls to Resist", inherent: true, range: BestowsRange.single, value: -2));
-    spell.addRitualModifier(new SubjectWeight(value: 300));
-    spell.description = _description;
-    return spell;
+    String _description = "You create a mystical 'booby-trap,' akin to cans strung along a wire, in a "
+        "five-yard radius from the starting point. When an unauthorized being (you may "
+        "authorize up to six) enters the area, every authorized being automatically "
+        "wakes up (if asleep) and becomes aware of the invasion. Mundane stealth cannot "
+        "overcome this; resolve any supernatural attempts at stealth as a Quick Contest "
+        "against the incanter's Path of Arcanum. This is a conditional spell (p. 20) "
+        "that 'hangs' until triggered or until everyone wakes up for the day.";
+
+    _spell.name = "Alarm";
+    _spell.conditional = true;
+    _spell.addEffect(new SpellEffect(Effect.Create, Path.Arcanum));
+    AreaOfEffect m = new AreaOfEffect(value: 5, inherent: true)..setTargetInfo(6, true);
+    _spell.addRitualModifier(m);
+    _spell.addRitualModifier(new Bestows("Rolls to resist", value: 2, range: BestowsRange.single));
+    _spell.addRitualModifier(new SubjectWeight(value: 300));
+    _spell.description = _description;
+    return _spell;
   }
 
   Spell get spell {
