@@ -32,11 +32,11 @@ class AppComponent {
 
     _spell.name = "Alarm";
     _spell.conditional = true;
-    _spell.addEffect(new SpellEffect(Effect.Create, Path.Arcanum));
+    _spell.effects.add(new SpellEffect(Effect.Create, Path.Arcanum));
     AreaOfEffect m = new AreaOfEffect(value: 5, inherent: true)..setTargetInfo(6, true);
-    _spell.addRitualModifier(m);
-    _spell.addRitualModifier(new Bestows("Rolls to resist", value: 2, range: BestowsRange.single));
-    _spell.addRitualModifier(new SubjectWeight(value: 300));
+    _spell.ritualModifiers.add(m);
+    _spell.ritualModifiers.add(new Bestows("Rolls to resist", value: 2, range: BestowsRange.single));
+    _spell.ritualModifiers.add(new SubjectWeight(value: 300));
     _spell.description = _description;
     return _spell;
   }
