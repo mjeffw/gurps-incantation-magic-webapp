@@ -9,11 +9,37 @@
 
 <div>
   <div class='left-component-wrap'>
-    <material-button icon class='add-btn material-list-item-secondary' (trigger)='addModifier()'>
+    <material-button icon class='add-btn material-list-item-secondary'
+                     (trigger)="showModifierDialog = true"
+                     [disabled]="showModifierDialog">
       <glyph icon='add_circle'></glyph>
     </material-button>
     <div class='left-component subheading'>MODIFIERS</div>
   </div>
+
+  <!-- add Modifier dialog -->
+  <modal [visible]="showModifierDialog">
+    <material-dialog class="basic-dialog">
+      <h3 header>Select Ritual Modifier</h3>
+      <material-dropdown-select
+          autofocus
+          [buttonText]="modifierSelectLabel"
+          [selection]="modifierSelectModel"
+          [options]="modifierOptions">
+      </material-dropdown-select>
+      <div footer>
+        <material-button (trigger)="showModifierDialog = false"
+                         class="white">
+           CANCEL
+        </material-button>
+        <material-button (trigger)="addModifier()"
+                         class="blue">
+          ADD MODIFIER
+        </material-button>
+      </div>
+    </material-dialog>
+  </modal>
+
 
   <div *ngFor='let item of spell.ritualModifiers; let i = index'>
     <modifier-editor [spell]="spell" [modifier]='item' [index]='i'></modifier-editor>

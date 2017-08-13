@@ -6,7 +6,7 @@ import 'exporter/web_exporter.dart';
 @Component(
   selector: 'modifier-editor',
   styleUrls: const ['app_component.css'],
-  directives: const <dynamic>[COMMON_DIRECTIVES, materialDirectives, materialInputDirectives],
+  directives: const <dynamic>[COMMON_DIRECTIVES, materialDirectives, materialInputDirectives, MaterialNumberValueAccessor],
   templateUrl: 'modifier_editor_component.html',
   providers: const <dynamic>[materialProviders],
 

@@ -9,6 +9,7 @@ import 'modifier_editor_component.dart';
 
 // AngularDart info: https://webdev.dartlang.org/angular
 // Components info: https://webdev.dartlang.org/components
+typedef RitualModifier Creator();
 
 @Component(
   selector: 'my-app',
@@ -49,7 +50,38 @@ class AppComponent {
     return _spell;
   }
 
-  void addModifier() {}
+  bool showModifierDialog = false;
+
+  final SelectionOptions<String> modifierOptions = new SelectionOptions.fromList(map.keys.toList(growable: false));
+
+  static Map<String, Creator> map = {
+    "Affliction": () => new Affliction(null),
+    "Affliction (Stun)": () => new AfflictionStun(),
+    "Altered Traits": () => new AlteredTraits(null, 0),
+    "Area of Effect": () => new AreaOfEffect(),
+    "Bestows a (Bonus or Penalty)": () => new Bestows(null),
+    "Damage": () => new Damage(),
+    "Duration": () => new DurationMod(),
+    "Girded": () => new Girded(),
+    "Range": () => new Range(),
+    "Range (Cross-time)": () => new RangeCrossTime(),
+    "Range (Extradimensional)": () => new RangeDimensional(),
+    "Range (Informational)": () => new RangeInformational(),
+    "Repair": () => new Repair(null),
+    "Speed": () => new Speed(),
+    "Subject Weight": () => new SubjectWeight(),
+    "Summoned": () => new Summoned(),
+  };
+
+  final SelectionModel<String> modifierSelectModel =
+      new SelectionModel.withList(selectedValues: [map.keys.toList(growable: false)[0]]);
+
+  String get modifierSelectLabel => modifierSelectModel.selectedValues.first;
+
+  void addModifier() {
+    spell.ritualModifiers.add(map[modifierSelectLabel]());
+    showModifierDialog = false;
+  }
 
   void removeModifier(int index) {
     spell.ritualModifiers.removeAt(index);

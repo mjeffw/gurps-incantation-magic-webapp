@@ -17,6 +17,17 @@
 
     <div *ngSwitchDefault></div>
 
+    <div *ngSwitchCase="'Afflictions'">
+      <material-input style="width: 100%;" label="ENHANCEMENT" floatingLabel [(ngModel)]="modifier.specialization">
+      </material-input>
+      <material-input type="number"
+                      checkInteger
+                      trailingText="%"
+                      rightAlign="true"
+                      [(ngModel)]="modifier.value">
+      </material-input>
+    </div>
+
     <div *ngSwitchCase="'Area of Effect'">
       <material-toggle label="{{modifier.includes ? 'Includes' : 'Excludes'}}"
                        [(checked)]="modifier.includes"></material-toggle>

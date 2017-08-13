@@ -11,14 +11,11 @@ class WebModifierExporter extends TextModifierExporter {
     this.detail = detail as WebModifierDetail;
   }
 
-  // TODO: implement createAlteredTraitsDetail
   @override
-  ModifierDetail createAfflictionDetail() => null;
+  ModifierDetail createAfflictionDetail() => new WebAfflictionDetail();
 
   @override
-  ModifierDetail createAfflictionStunDetail() {
-    // TODO: implement createAlteredTraitsDetail
-  }
+  ModifierDetail createAfflictionStunDetail() => new WebAfflictionStunDetail();
 
   @override
   ModifierDetail createAlteredTraitsDetail() {
@@ -80,11 +77,18 @@ abstract class WebModifierDetail extends ModifierDetail {
   String get summaryText => null;
 }
 
+class WebAfflictionStunDetail extends WebModifierDetail {
+  // TODO: implement typicalText
+  @override
+  String get typicalText => "";
+}
+
 class WebAfflictionDetail extends WebModifierDetail implements AfflictionDetail {
+  @override
   String specialization;
 
   @override
-  String type = 'Affliction';
+  String type = 'Afflictions';
 
   @override
   String get typicalText => '${name}, ${specialization} (${value}%)';
