@@ -28,6 +28,12 @@
       </material-input>
     </div>
 
+    <div *ngSwitchCase="'Altered Traits'">
+      <material-input style="width: 100%;" label="TRAIT" floatingLabel [(ngModel)]="modifier.specialization">
+      </material-input>
+    </div>
+
+
     <div *ngSwitchCase="'Area of Effect'">
       <material-toggle label="{{modifier.includes ? 'Includes' : 'Excludes'}}"
                        [(checked)]="modifier.includes"></material-toggle>

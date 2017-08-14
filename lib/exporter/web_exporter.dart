@@ -1,3 +1,4 @@
+import 'package:gurps_incantation_magic_model/gurps/modifier.dart';
 import 'package:gurps_incantation_magic_model/incantation_magic.dart';
 
 //class WebSpellExporter implements SpellExporter {
@@ -18,9 +19,7 @@ class WebModifierExporter extends TextModifierExporter {
   ModifierDetail createAfflictionStunDetail() => new WebAfflictionStunDetail();
 
   @override
-  ModifierDetail createAlteredTraitsDetail() {
-    // TODO: implement createAlteredTraitsDetail
-  }
+  ModifierDetail createAlteredTraitsDetail() => new WebAlteredTraitsDetail();
 
   @override
   ModifierDetail createAreaEffectDetail() => new AreaOfEffectModifierDetail();
@@ -92,6 +91,31 @@ class WebAfflictionDetail extends WebModifierDetail implements AfflictionDetail 
 
   @override
   String get typicalText => '${name}, ${specialization} (${value}%)';
+}
+
+class WebAlteredTraitsDetail extends WebModifierDetail implements AlteredTraitsDetail {
+  @override
+  int specLevel;
+
+  @override
+  String specialization;
+
+  List<Modifier> modifiers = [];
+
+  @override
+  void addModifier(Modifier it) => modifiers.add(it);
+
+  @override
+  String get typicalText {
+    String temp = '${name}, ${specialization}';
+    if (specLevel != null && specLevel != 0) {
+      temp += ' ${specLevel}';
+    }
+    if (modifiers.isNotEmpty) {
+      temp += ' (${modifiers.map((e) => e.typicalText).join('; ')})';
+    }
+    return temp;
+  }
 }
 
 class AreaOfEffectModifierDetail extends WebModifierDetail implements AreaOfEffectDetail {

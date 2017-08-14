@@ -3,8 +3,8 @@ import 'package:angular2/angular2.dart';
 import 'package:gurps_incantation_magic_model/incantation_magic.dart';
 
 @Component(
-  selector: 'spell-effect-editor',
-  styleUrls: const ['app_component.css'],
+  selector: 'mjw-enhancerlist-editor',
+  styleUrls: const ['spell_editor.css'],
   directives: const <dynamic>[CORE_DIRECTIVES, materialDirectives],
   template: '''
       <!-- Spell Effects table -->
@@ -12,7 +12,7 @@ import 'package:gurps_incantation_magic_model/incantation_magic.dart';
         <material-button icon class='add-btn material-list-item-secondary' (trigger)='addEffect()'>
           <glyph icon='add_circle'></glyph>
         </material-button>
-        <div class='left-component subheading'>EFFECTS</div>
+        <div class='left-component subheading'>SPELL EFFECTS</div>
       </div>
       <material-list>
         <material-list-item *ngFor='let item of effects; let i = index'>

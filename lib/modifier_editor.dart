@@ -4,14 +4,14 @@ import 'package:gurps_incantation_magic_model/incantation_magic.dart';
 import 'exporter/web_exporter.dart';
 
 @Component(
-  selector: 'modifier-editor',
-  styleUrls: const ['app_component.css'],
+  selector: 'mjw-modifier-editor',
+  styleUrls: const ['spell_editor.css'],
   directives: const <dynamic>[COMMON_DIRECTIVES, materialDirectives, materialInputDirectives, MaterialNumberValueAccessor],
-  templateUrl: 'modifier_editor_component.html',
+  templateUrl: 'modifier_editor.html',
   providers: const <dynamic>[materialProviders],
 
 )
-class ModifierEditorComponent implements OnChanges {
+class ModifierEditorComponent {
   @Input()
   Spell spell;
 
@@ -46,11 +46,6 @@ class ModifierEditorComponent implements OnChanges {
   String get typicalText {
     _modifier.export(exporter);
     return exporter.detail.typicalText;
-  }
-
-  @override
-  void ngOnChanges(Map<String, SimpleChange> changes) {
-    changes.forEach((key, value) => print('${key} : ${value.previousValue} > ${value.currentValue}'));
   }
 }
 

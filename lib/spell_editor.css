@@ -14,16 +14,15 @@
 }
 
 .subheading {
-    font-family: Roboto, sans-serif;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    font-size: 1rem;
-    font-weight: 400;
-/*    letter-spacing: 0.04em; */
-/*    line-height: 1.25rem; */
-    color: rgba(0, 0, 0, 0.54);
-    padding-bottom: 4px;
-    vertical-align: bottom;
+  font-family: Roboto, sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.54);
+  padding-bottom: 4px;
+  vertical-align: bottom;
+  background: #fafafa;
 }
 
 .remove-button {

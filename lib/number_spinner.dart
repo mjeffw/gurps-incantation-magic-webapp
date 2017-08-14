@@ -3,7 +3,7 @@ import 'package:angular2/angular2.dart';
 
 @Component(
   selector: 'mjw-number-spinner',
-  styleUrls: const ['app_component.css'],
+  styleUrls: const ['spell_editor.css'],
   directives: const <dynamic>[CORE_DIRECTIVES, materialDirectives],
   template: '''
      <div class="mjw-number-spinner">

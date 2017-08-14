@@ -4,7 +4,7 @@
 </div>
 
 <div>
-  <spell-effect-editor [effects]='spell.effects'></spell-effect-editor>
+  <mjw-effectlist-editor [effects]='spell.effects'></mjw-effectlist-editor>
 </div>
 
 <div>
@@ -14,7 +14,7 @@
                      [disabled]="showModifierDialog">
       <glyph icon='add_circle'></glyph>
     </material-button>
-    <div class='left-component subheading'>MODIFIERS</div>
+    <div class='left-component subheading'>RITUAL MODIFIERS</div>
   </div>
 
   <!-- add Modifier dialog -->
@@ -42,7 +42,7 @@
 
 
   <div *ngFor='let item of spell.ritualModifiers; let i = index'>
-    <modifier-editor [spell]="spell" [modifier]='item' [index]='i'></modifier-editor>
+    <mjw-modifier-editor [spell]="spell" [modifier]='item' [index]='i'></mjw-modifier-editor>
   </div>
 </div>
 
