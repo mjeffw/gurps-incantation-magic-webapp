@@ -1,4 +1,4 @@
-import 'package:gurps_incantation_magic_model/gurps/modifier.dart';
+import 'package:gurps_incantation_magic_model/gurps/trait_modifier.dart';
 import 'package:gurps_incantation_magic_model/incantation_magic.dart';
 
 //class WebSpellExporter implements SpellExporter {
@@ -100,10 +100,10 @@ class WebAlteredTraitsDetail extends WebModifierDetail implements AlteredTraitsD
   @override
   String specialization;
 
-  List<Modifier> modifiers = [];
+  List<TraitModifier> modifiers = [];
 
   @override
-  void addModifier(Modifier it) => modifiers.add(it);
+  void addModifier(TraitModifier it) => modifiers.add(it);
 
   @override
   String get typicalText {

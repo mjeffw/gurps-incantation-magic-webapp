@@ -34,10 +34,10 @@ import 'package:gurps_incantation_magic_model/incantation_magic.dart';
   ''',
   providers: const <dynamic>[materialProviders],
 )
-class SpellEffectEditorComponent {
+class EffectListEditor {
   List<SpellEffect> _effects;
 
-  SpellEffectEditorComponent() {
+  EffectListEditor() {
     _effects = [];
     _fillOutModelLists();
   }

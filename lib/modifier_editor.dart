@@ -2,16 +2,22 @@ import 'package:angular_components/angular_components.dart';
 import 'package:angular2/angular2.dart';
 import 'package:gurps_incantation_magic_model/incantation_magic.dart';
 import 'exporter/web_exporter.dart';
+import 'package:ng_materialdesign_sandbox/traitmodifier_list_editor.dart';
 
 @Component(
   selector: 'mjw-modifier-editor',
   styleUrls: const ['spell_editor.css'],
-  directives: const <dynamic>[COMMON_DIRECTIVES, materialDirectives, materialInputDirectives, MaterialNumberValueAccessor],
+  directives: const <dynamic>[
+    COMMON_DIRECTIVES,
+    materialDirectives,
+    materialInputDirectives,
+    MaterialNumberValueAccessor,
+    TraitModifierListEditor
+  ],
   templateUrl: 'modifier_editor.html',
   providers: const <dynamic>[materialProviders],
-
 )
-class ModifierEditorComponent {
+class ModifierEditor {
   @Input()
   Spell spell;
 
@@ -51,11 +57,16 @@ class ModifierEditorComponent {
 
 class AreaOfEffectAdapter {
   AreaOfEffect _area;
-  ModifierEditorComponent _component;
+  ModifierEditor _component;
   AreaOfEffectAdapter(this._area, this._component);
 
-  void incrementTargets() { _area.targets++; }
-  void decrementTargets() { _area.targets--; }
+  void incrementTargets() {
+    _area.targets++;
+  }
+
+  void decrementTargets() {
+    _area.targets--;
+  }
 
   bool get includes => _area.includes;
   set includes(bool value) {

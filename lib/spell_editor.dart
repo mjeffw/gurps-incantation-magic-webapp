@@ -15,10 +15,10 @@ typedef RitualModifier Creator();
   selector: 'mjw-spell-editor',
   styleUrls: const ['spell_editor.css'],
   templateUrl: 'spell_editor.html',
-  directives: const <dynamic>[CORE_DIRECTIVES, materialDirectives, SpellEffectEditorComponent, ModifierEditorComponent],
+  directives: const <dynamic>[CORE_DIRECTIVES, materialDirectives, EffectListEditor, ModifierEditor],
   providers: const <dynamic>[materialProviders],
 )
-class AppComponent {
+class SpellEditor {
   Spell _spell;
 
   Spell createSpell() {
@@ -29,8 +29,8 @@ class AppComponent {
     spell.name = 'Bulwark';
     spell.effects.add(new SpellEffect(Effect.Strengthen, Path.Protection));
     AlteredTraits alteredTraits = new AlteredTraits("Damage Resistance", 6, value: 30, inherent: true);
-    alteredTraits.addModifier("Hardened 2", null, 40);
-    alteredTraits.addModifier("Tough Skin", null, -40);
+    alteredTraits.addTraitModifier("Hardened 2", null, 40);
+    alteredTraits.addTraitModifier("Tough Skin", null, -40);
     spell.ritualModifiers.add(alteredTraits);
     spell.ritualModifiers.add(new DurationMod(value: new GurpsDuration(minutes: 12).inSeconds));
     spell.ritualModifiers.add(new SubjectWeight(value: 1000));
