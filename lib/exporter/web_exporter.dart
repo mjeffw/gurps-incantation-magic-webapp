@@ -90,7 +90,7 @@ class WebAfflictionDetail extends WebModifierDetail implements AfflictionDetail 
   String type = 'Afflictions';
 
   @override
-  String get typicalText => '${name}, ${specialization} (${value}%)';
+  String get typicalText => '${specialization} (${value}%)';
 }
 
 class WebAlteredTraitsDetail extends WebModifierDetail implements AlteredTraitsDetail {
@@ -107,7 +107,7 @@ class WebAlteredTraitsDetail extends WebModifierDetail implements AlteredTraitsD
 
   @override
   String get typicalText {
-    String temp = '${name}, ${specialization}';
+    String temp = '${specialization}';
     if (specLevel != null && specLevel != 0) {
       temp += ' ${specLevel}';
     }

@@ -34,6 +34,7 @@ class SpellEditor {
     spell.ritualModifiers.add(alteredTraits);
     spell.ritualModifiers.add(new DurationMod(value: new GurpsDuration(minutes: 12).inSeconds));
     spell.ritualModifiers.add(new SubjectWeight(value: 1000));
+    spell.ritualModifiers.add(new Affliction("Daze", value: 50, inherent: true));
     spell.description = _description;
     _spell = spell;
     return _spell;

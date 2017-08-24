@@ -5,7 +5,12 @@ import 'package:gurps_incantation_magic_model/incantation_magic.dart';
 @Component(
   selector: 'mjw-traitmodifier-list-editor',
   styleUrls: const ['spell_editor.css'],
-  directives: const <dynamic>[CORE_DIRECTIVES, materialDirectives],
+  directives: const <dynamic>[
+    CORE_DIRECTIVES,
+    materialDirectives,
+    materialInputDirectives,
+    MaterialNumberValueAccessor,
+  ],
   template: '''
     <div>
       <div class='left-component-wrap'>
@@ -14,35 +19,47 @@ import 'package:gurps_incantation_magic_model/incantation_magic.dart';
         </material-button>
         <div class='left-component subheading'>TRAIT MODIFIERS</div>
       </div>
-      <material-list>
-        <material-list-item *ngFor='let item of traitModifiers.traitModifiers; let i = index'>
-          <material-input style="width: 100%;" label="ENHANCEMENT" floatingLabel [(ngModel)]="item.name">
+      
+      <div *ngFor='let item of traitModifiable.traitModifiers; let i = index' class='left-component-wrap'>
+        <span class="left-component">
+          <material-input style='width: 70%;' 
+                          type='text' 
+                          label="ENHANCEMENT" 
+                          floatingLabel
+                          [(ngModel)]="item.name">
           </material-input>
-          <material-input type="number"
+          <material-input style='width: 12%;' 
+                          type="number"
                           checkInteger
                           trailingText="%"
                           rightAlign="true"
                           [(ngModel)]="item.level">
           </material-input>
-          <material-button icon class='material-list-item-secondary' (trigger)='removeTraitModifier(i)'>
-            <glyph icon='remove_circle' class='remove-button'></glyph>
-          </material-button>
-        </material-list-item>
-      </material-list>
+        </span>
+       
+          <material-button icon class='remove-btn' (trigger)='removeModifier(i)' style="margin-right: 24px;">
+            <glyph icon='remove_circle'></glyph>
+          </material-button>              
+      </div> 
     </div>
   ''',
   providers: const <dynamic>[materialProviders],
 )
 class TraitModifierListEditor {
+  TraitModifiable _traitModifiable;
+
   @Input()
-  TraitModifiable traitModifiers;
+  TraitModifiable get traitModifiable => _traitModifiable;
+
+  @Input()
+  set traitModifiable(TraitModifiable t) => _traitModifiable = t;
 
   // == TraitModifier add/remove button support ==
   void addTraitModifier() {
-    traitModifiers.addTraitModifier(null, null, 0);
+    _traitModifiable.addTraitModifier(null, null, 0);
   }
 
-  void removeEffect(int index) {
-    traitModifiers.removeAt(index);
+  void removeModifier(int index) {
+    _traitModifiable.removeAt(index);
   }
 }

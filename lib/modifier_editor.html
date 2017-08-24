@@ -29,9 +29,17 @@
     </div>
 
     <div *ngSwitchCase="'Altered Traits'">
-      <material-input style="width: 100%;" label="TRAIT" floatingLabel [(ngModel)]="modifier.specialization">
+      <material-input style="width: 80%;" label="TRAIT" floatingLabel [(ngModel)]="modifier.specialization">
       </material-input>
-      <mjw-traitmodifier-list-editor [traitModifiers]="modifier"></mjw-traitmodifier-list-editor>
+      <material-input style="width: 10%;"
+                      rightAlign="true"
+                      type="number"
+                      checkInteger
+                      label="LEVEL"
+                      floatingLabel
+                      [(ngModel)]="modifier.specLevel">
+      </material-input>
+      <mjw-traitmodifier-list-editor [traitModifiable]="modifier"></mjw-traitmodifier-list-editor>
     </div>
 
 
