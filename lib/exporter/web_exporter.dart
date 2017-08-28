@@ -130,6 +130,7 @@ class AreaOfEffectModifierDetail extends WebModifierDetail implements AreaOfEffe
 class BestowsModifierDetail extends WebModifierDetail implements BestowsDetail {
   @override
   String get typicalText => '${value < 0 ? "-" : "+"}${value.abs()} to ${specialization}';
+
   @override
   String range;
 
@@ -137,25 +138,31 @@ class BestowsModifierDetail extends WebModifierDetail implements BestowsDetail {
   String specialization;
 }
 
-class DamageModifierDetail extends WebModifierDetail implements DamageDetail {
+class DamageModifierDetail extends WebModifierDetail with TraitModifiable implements DamageDetail {
   @override
-  void addModifier(TraitModifier e) {
-    // TODO: implement addModifier
-  }
+  DieRoll dieRoll;
 
   @override
-  set dieRoll(DieRoll d) {
-    // TODO: implement dieRoll
-  }
+  bool direct;
 
   @override
-  set direct(bool direct) {
-    // TODO: implement direct
-  }
+  bool vampiric;
 
-  // TODO: implement typicalText
   @override
-  String get typicalText => null;
+  bool explosive;
+
+  @override
+  String get typicalText {
+    String temp =
+        '${direct ? 'Direct' : 'Indirect'} '
+        '${explosive ? 'Explosive' : ''} '
+        '${vampiric ? 'Vampiric' : ''} '
+        '${type} ${dieRoll}';
+    if (traitModifiers.isNotEmpty) {
+      temp += ' (${traitModifiers.map((e) => "${e.typicalText}").join('; ')})';
+    }
+    return temp;
+  }
 }
 
 class DurationModifierDetail extends WebModifierDetail {

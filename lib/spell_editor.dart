@@ -27,7 +27,7 @@ class SpellEditor {
     spell.effects.add(new SpellEffect(Effect.Sense, Path.Augury));
     spell.effects.add(new SpellEffect(Effect.Destroy, Path.Mesmerism));
     Damage dam = new Damage(type: DamageType.burning, direct: true, value: 8, inherent: true);
-    dam.addTraitModifier("No Incendiary", null, -10);
+    dam.addTraitModifier(new TraitModifier("No Incendiary", null, -10));
     spell.ritualModifiers.add(dam);
     return _spell;
   }

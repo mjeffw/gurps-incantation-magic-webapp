@@ -38,6 +38,8 @@ class ModifierEditor {
       case Bestows:
         properties['bestowsAdapter'] = new BestowsAdapter(_modifier as Bestows);
         break;
+      case Damage:
+        properties['damageAdapter'] = new DamageAdapter(_modifier as Damage);
     }
     _modifier.export(exporter);
   }
@@ -98,4 +100,24 @@ class BestowsAdapter {
   void onData(List<SelectionChangeRecord<BestowsRange>> list) {
     list.forEach((r) => _modifier.range = r.added.first);
   }
+}
+
+class DamageAdapter {
+  Damage _modifier;
+
+  DamageAdapter(this._modifier);
+
+  SelectionOptions<DamageType> typeList = new SelectionOptions.fromList(DamageType.values);
+
+  SelectionModel<DamageType> get selectionModel {
+    SelectionModel<DamageType> model = new SelectionModel.withList(selectedValues: [_modifier.type]);
+    model.selectionChanges.listen(onData);
+    return model;
+  }
+
+  void onData(List<SelectionChangeRecord<DamageType>> list) {
+    list.forEach((r) => _modifier.type = r.added.first);
+  }
+
+  String render(DamageType value) => damageTypeLabels[value];
 }

@@ -46,8 +46,7 @@
 
 
     <div *ngSwitchCase="'Area of Effect'">
-      <material-toggle label="{{modifier.includes ? 'Includes' : 'Excludes'}}"
-                       [(checked)]="modifier.includes"></material-toggle>
+      <material-checkbox label="Includes" [(checked)]="modifier.includes"></material-checkbox>
       <div>
         <material-button icon (trigger)='properties["areaOfEffectAdapter"].incrementTargets()'>
           <glyph icon='add_circle'></glyph>
@@ -62,7 +61,7 @@
     <div *ngSwitchCase="'Bestows a (Bonus or Penalty)'">
       <material-dropdown-select
           [options]='properties["bestowsAdapter"].rangeList'
-          [buttonText]='properties["bestowsAdapter"].valueToString[modifier.range]'
+          [buttonText]='properties["bestowsAdapter"].render(modifier.range)'
           [selection]='properties["bestowsAdapter"].selectionModel'
           [itemRenderer]='properties["bestowsAdapter"].render'>
       </material-dropdown-select>
@@ -70,9 +69,26 @@
       </material-input>
     </div>
 
+    <div *ngSwitchCase="'Damage'">
+      <material-checkbox label="Direct" [(checked)]="modifier.direct"></material-checkbox>
+      <material-checkbox label="Explosive"
+                         [disabled]="modifier.direct"
+                       [(checked)]="modifier.explosive"></material-checkbox>
+      <material-checkbox label="Vampiric" [(checked)]="modifier.vampiric"></material-checkbox>
+      <div>
+        <material-dropdown-select
+            [options]='properties["damageAdapter"].typeList'
+            [buttonText]='properties["damageAdapter"].render(modifier.type)'
+            [selection]='properties["damageAdapter"].selectionModel'
+            [itemRenderer]='properties["damageAdapter"].render'>
+        </material-dropdown-select>
+        <mjw-traitmodifier-list-editor [traitModifiable]="modifier"></mjw-traitmodifier-list-editor>
+      </div>
+    </div>
+
     <div style='padding-top: 16px;' class='left-component-wrap'>
       <span class='left-component'>
-        <material-toggle style="padding-top: 8px;" label="Inherent" [(checked)]='modifier.inherent'></material-toggle>
+        <material-checkbox style="padding-top: 8px;" label="Inherent" [(checked)]='modifier.inherent'></material-checkbox>
       </span>
       <material-button icon class='remove-btn' (trigger)='removeModifier()'>
         <glyph icon='remove_circle'></glyph>

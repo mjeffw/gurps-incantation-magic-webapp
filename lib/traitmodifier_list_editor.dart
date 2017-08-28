@@ -56,7 +56,7 @@ class TraitModifierListEditor {
 
   // == TraitModifier add/remove button support ==
   void addTraitModifier() {
-    _traitModifiable.addTraitModifier(null, null, 0);
+    _traitModifiable.addTraitModifier(new TraitModifier(null, null, 0));
   }
 
   void removeModifier(int index) {
