@@ -28,9 +28,7 @@ class WebModifierExporter extends TextModifierExporter {
   ModifierDetail createBestowsDetail() => new BestowsModifierDetail();
 
   @override
-  ModifierDetail createDamageDetail() {
-    // TODO: implement createDamageDetail
-  }
+  ModifierDetail createDamageDetail() => new DamageModifierDetail();
 
   @override
   ModifierDetail createDurationDetail() => new DurationModifierDetail();
@@ -126,18 +124,38 @@ class AreaOfEffectModifierDetail extends WebModifierDetail implements AreaOfEffe
   int targets;
 
   @override
-  String get typicalText => 'Area of Effect, ${value} yards, ${includes ? "including" : "excluding"} ${targets} targets';
+  String get typicalText => '${value} yards, ${includes ? "including" : "excluding"} ${targets} targets';
 }
 
 class BestowsModifierDetail extends WebModifierDetail implements BestowsDetail {
   @override
-  String get typicalText =>
-      'Bestows a ${value < 0 ? "Penalty" : "Bonus"}, ${value < 0 ? "-" : "+"}${value.abs()} to ${specialization}';
+  String get typicalText => '${value < 0 ? "-" : "+"}${value.abs()} to ${specialization}';
   @override
   String range;
 
   @override
   String specialization;
+}
+
+class DamageModifierDetail extends WebModifierDetail implements DamageDetail {
+  @override
+  void addModifier(TraitModifier e) {
+    // TODO: implement addModifier
+  }
+
+  @override
+  set dieRoll(DieRoll d) {
+    // TODO: implement dieRoll
+  }
+
+  @override
+  set direct(bool direct) {
+    // TODO: implement direct
+  }
+
+  // TODO: implement typicalText
+  @override
+  String get typicalText => null;
 }
 
 class DurationModifierDetail extends WebModifierDetail {

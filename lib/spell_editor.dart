@@ -23,20 +23,12 @@ class SpellEditor {
 
   Spell createSpell() {
     _spell = new Spell();
-    String _description =
-        "This spell grants the subject DR 6 with the Tough Skin and Hardened 2 modifiers. This protection lasts for "
-        "12 minutes.";
-    spell.name = 'Bulwark';
-    spell.effects.add(new SpellEffect(Effect.Strengthen, Path.Protection));
-    AlteredTraits alteredTraits = new AlteredTraits("Damage Resistance", 6, value: 30, inherent: true);
-    alteredTraits.addTraitModifier("Hardened 2", null, 40);
-    alteredTraits.addTraitModifier("Tough Skin", null, -40);
-    spell.ritualModifiers.add(alteredTraits);
-    spell.ritualModifiers.add(new DurationMod(value: new GurpsDuration(minutes: 12).inSeconds));
-    spell.ritualModifiers.add(new SubjectWeight(value: 1000));
-    spell.ritualModifiers.add(new Affliction("Daze", value: 50, inherent: true));
-    spell.description = _description;
-    _spell = spell;
+    spell.name = 'Death Vision';
+    spell.effects.add(new SpellEffect(Effect.Sense, Path.Augury));
+    spell.effects.add(new SpellEffect(Effect.Destroy, Path.Mesmerism));
+    Damage dam = new Damage(type: DamageType.burning, direct: true, value: 8, inherent: true);
+    dam.addTraitModifier("No Incendiary", null, -10);
+    spell.ritualModifiers.add(dam);
     return _spell;
   }
 

@@ -9,18 +9,20 @@
     </span>
   </div>
   <span [ngSwitch]="modifier.name">
-    <div style="padding-bottom: 12px;">
-      <material-button icon (trigger)='modifier.incrementSpellPoints()'><glyph icon='add_circle'></glyph></material-button>
-      <material-button icon (trigger)='modifier.decrementSpellPoints()'><glyph icon='remove_circle'></glyph></material-button>
-      <span style="padding-left: 10px;">{{modifier.spellPoints}} SP</span>
-    </div>
+    <span *ngIf="modifier.name != 'Affliction, Stunning'">
+      <div style="padding-bottom: 12px;">
+        <material-button icon (trigger)='modifier.incrementSpellPoints()'><glyph icon='add_circle'></glyph></material-button>
+        <material-button icon (trigger)='modifier.decrementSpellPoints()'><glyph icon='remove_circle'></glyph></material-button>
+        <span style="padding-left: 10px;">{{modifier.spellPoints}} SP</span>
+      </div>
+    </span>
 
     <div *ngSwitchDefault></div>
 
     <div *ngSwitchCase="'Afflictions'">
-      <material-input style="width: 100%;" label="ENHANCEMENT" floatingLabel [(ngModel)]="modifier.specialization">
+      <material-input style="width: 80%;" label="EFFECT" floatingLabel [(ngModel)]="modifier.specialization">
       </material-input>
-      <material-input type="number"
+      <material-input style="width: 10%;" type="number"
                       checkInteger
                       trailingText="%"
                       rightAlign="true"
