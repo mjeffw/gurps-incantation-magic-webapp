@@ -1,5 +1,5 @@
 import 'package:angular_components/angular_components.dart';
-import 'package:angular2/angular2.dart';
+import 'package:angular/angular.dart';
 import 'package:gurps_incantation_magic_model/incantation_magic.dart';
 import 'exporter/web_exporter.dart';
 import 'package:ng_materialdesign_sandbox/traitmodifier_list_editor.dart';

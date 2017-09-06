@@ -1,5 +1,5 @@
 import 'package:angular_components/angular_components.dart';
-import 'package:angular2/angular2.dart';
+import 'package:angular/angular.dart';
 import 'package:gurps_incantation_magic_model/incantation_magic.dart';
 
 @Component(
@@ -32,7 +32,7 @@ import 'package:gurps_incantation_magic_model/incantation_magic.dart';
                           type="number"
                           checkInteger
                           trailingText="%"
-                          rightAlign="true"
+                          rightAlign
                           [(ngModel)]="item.level">
           </material-input>
         </span>
@@ -48,7 +48,6 @@ import 'package:gurps_incantation_magic_model/incantation_magic.dart';
 class TraitModifierListEditor {
   TraitModifiable _traitModifiable;
 
-  @Input()
   TraitModifiable get traitModifiable => _traitModifiable;
 
   @Input()
