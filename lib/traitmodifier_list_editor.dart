@@ -1,5 +1,5 @@
-import 'package:angular_components/angular_components.dart';
 import 'package:angular/angular.dart';
+import 'package:angular_components/angular_components.dart';
 import 'package:gurps_incantation_magic_model/incantation_magic.dart';
 
 @Component(

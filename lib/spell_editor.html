@@ -28,12 +28,10 @@
           [options]="modifierOptions">
       </material-dropdown-select>
       <div footer>
-        <material-button (trigger)="showModifierDialog = false"
-                         class="white">
+        <material-button (trigger)="showModifierDialog = false" class="white">
            CANCEL
         </material-button>
-        <material-button (trigger)="addModifier()"
-                         class="blue">
+        <material-button (trigger)="addModifier()" class="blue">
           ADD MODIFIER
         </material-button>
       </div>
@@ -60,3 +58,7 @@
 </div>
 
 <!-- TODO add spell text -->
+
+<div>
+  <mjw-spell-text [spell]="spell"></mjw-spell-text>
+</div>

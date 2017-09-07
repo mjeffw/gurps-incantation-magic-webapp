@@ -1,8 +1,6 @@
 import 'package:gurps_incantation_magic_model/gurps/trait_modifier.dart';
 import 'package:gurps_incantation_magic_model/incantation_magic.dart';
 
-//class WebSpellExporter implements SpellExporter {
-//}
 
 class WebModifierExporter extends TextModifierExporter {
   WebModifierDetail detail;
