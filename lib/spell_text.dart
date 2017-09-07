@@ -26,12 +26,26 @@ import 'exporter/web_exporter.dart';
   ''',
   providers: const <dynamic>[materialProviders],
 )
-class SpellText extends TextSpellExporter  {
+class SpellText extends TextSpellExporter implements DoCheck  {
   Spell _spell;
 
   @Input()
   set spell (Spell spell) {
     _spell = spell;
     _spell.export(this);
+  }
+
+  @override
+  dynamic ngDoCheck() {
+    TextSpellExporter exporter = new TextSpellExporter();
+    _spell.export(exporter);
+
+    if ((exporter.description != description) ||
+        (exporter.typical != typical) ||
+        (exporter.effectExporter.briefText != effectExporter.briefText) ||
+        (exporter.modifierExporter.briefText != modifierExporter.briefText) ||
+        (exporter.name != name)){
+      _spell.export(this);
+    }
   }
 }
