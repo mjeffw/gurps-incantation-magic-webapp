@@ -194,6 +194,15 @@
   color: white;
 }
 
+.red:not([raised]):not([disabled]) {
+  color: #f44336;
+}
+
+.red[raised]:not([disabled]) {
+  background-color: #f44336;
+  color: white;
+}
+
 .white:not([disabled]) {
   background-color: white;
   color: #4285f4;

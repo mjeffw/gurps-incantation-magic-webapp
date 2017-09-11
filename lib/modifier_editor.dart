@@ -1,7 +1,6 @@
 import 'package:angular_components/angular_components.dart';
 import 'package:angular/angular.dart';
 import 'package:gurps_incantation_magic_model/incantation_magic.dart';
-import 'exporter/web_exporter.dart';
 import 'package:ng_materialdesign_sandbox/traitmodifier_list_editor.dart';
 
 @Component(
@@ -17,9 +16,9 @@ import 'package:ng_materialdesign_sandbox/traitmodifier_list_editor.dart';
   templateUrl: 'modifier_editor.html',
   providers: const <dynamic>[materialProviders],
 )
-class ModifierEditor {
+class ModifierEditor extends TextModifierExporter implements DoCheck {
   @Input()
-  Spell spell;
+  List<RitualModifier> ritualModifiers;
 
   @Input()
   int index;
@@ -33,7 +32,7 @@ class ModifierEditor {
     properties.clear();
     switch (modifier.runtimeType) {
       case AreaOfEffect:
-        properties['areaOfEffectAdapter'] = new AreaOfEffectAdapter(_modifier as AreaOfEffect, this);
+        properties['areaOfEffectAdapter'] = new AreaOfEffectAdapter(_modifier as AreaOfEffect);
         break;
       case Bestows:
         properties['bestowsAdapter'] = new BestowsAdapter(_modifier as Bestows);
@@ -41,26 +40,30 @@ class ModifierEditor {
       case Damage:
         properties['damageAdapter'] = new DamageAdapter(_modifier as Damage);
     }
-    _modifier.export(exporter);
+    _modifier.export(this);
   }
 
-  WebModifierExporter exporter = new WebModifierExporter();
   Map<String, dynamic> properties = new Map<String, dynamic>();
 
   void removeModifier() {
-    spell.ritualModifiers.removeAt(index);
+    ritualModifiers.removeAt(index);
   }
 
-  String get typicalText {
+  @override
+  void ngDoCheck() {
+    TextModifierExporter exporter = new TextModifierExporter();
     _modifier.export(exporter);
-    return exporter.detail.typicalText;
+
+    if ((exporter.details[0].detailText != details[0].detailText) || (exporter.briefText != briefText)) {
+      this.clear();
+      _modifier.export(this);
+    }
   }
 }
 
 class AreaOfEffectAdapter {
   AreaOfEffect _area;
-  ModifierEditor _component;
-  AreaOfEffectAdapter(this._area, this._component);
+  AreaOfEffectAdapter(this._area);
 
   void incrementTargets() {
     _area.targets++;
@@ -73,7 +76,6 @@ class AreaOfEffectAdapter {
   bool get includes => _area.includes;
   set includes(bool value) {
     _area.includes = value;
-    _area.export(_component.exporter);
   }
 }
 

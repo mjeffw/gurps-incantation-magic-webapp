@@ -1,6 +1,6 @@
 <material-expansionpanel flat [showSaveCancel]='false'
                          name='{{modifier.name}}'
-                         secondaryText='{{typicalText}} ({{modifier.spellPoints}})'>
+                         secondaryText='{{details[0].detailText}} ({{modifier.spellPoints}})'>
   <div value class='valueClass left-component-wrap'>
     <span class='right-component'>
       <span class='modifier-text' [ngClass]="{ invisible: !modifier.inherent }">
@@ -22,10 +22,7 @@
     <div *ngSwitchCase="'Afflictions'">
       <material-input style="width: 80%;" label="EFFECT" floatingLabel [(ngModel)]="modifier.specialization">
       </material-input>
-      <material-input style="width: 10%;" type="number"
-                      checkInteger
-                      trailingText="%"
-                      rightAlign="true"
+      <material-input style="width: 10%;" type="number" checkInteger trailingText="%" rightAlign
                       [(ngModel)]="modifier.value">
       </material-input>
     </div>
@@ -33,12 +30,7 @@
     <div *ngSwitchCase="'Altered Traits'">
       <material-input style="width: 80%;" label="TRAIT" floatingLabel [(ngModel)]="modifier.specialization">
       </material-input>
-      <material-input style="width: 10%;"
-                      rightAlign="true"
-                      type="number"
-                      checkInteger
-                      label="LEVEL"
-                      floatingLabel
+      <material-input style="width: 10%;" type="number" checkInteger label="LEVEL" floatingLabel rightAlign
                       [(ngModel)]="modifier.specLevel">
       </material-input>
       <mjw-traitmodifier-list-editor [traitModifiable]="modifier"></mjw-traitmodifier-list-editor>

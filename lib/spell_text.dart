@@ -1,7 +1,6 @@
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:gurps_incantation_magic_model/incantation_magic.dart';
-import 'exporter/web_exporter.dart';
 
 @Component(
   selector: 'mjw-spell-text',
@@ -36,7 +35,7 @@ class SpellText extends TextSpellExporter implements DoCheck  {
   }
 
   @override
-  dynamic ngDoCheck() {
+  void ngDoCheck() {
     TextSpellExporter exporter = new TextSpellExporter();
     _spell.export(exporter);
 
