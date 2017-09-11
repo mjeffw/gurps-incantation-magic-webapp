@@ -5,7 +5,7 @@ import 'package:gurps_incantation_magic_model/incantation_magic.dart';
 @Component(
   selector: 'mjw-spell-text',
   styleUrls: const ['spell_editor.css'],
-  directives: const <dynamic> [CORE_DIRECTIVES, materialDirectives],
+  directives: const <dynamic>[CORE_DIRECTIVES, materialDirectives],
   template: '''
   <h3><i>{{name}}</i></h3>
   <div>
@@ -25,11 +25,11 @@ import 'package:gurps_incantation_magic_model/incantation_magic.dart';
   ''',
   providers: const <dynamic>[materialProviders],
 )
-class SpellText extends TextSpellExporter implements DoCheck  {
+class SpellText extends TextSpellExporter implements DoCheck {
   Spell _spell;
 
   @Input()
-  set spell (Spell spell) {
+  set spell(Spell spell) {
     _spell = spell;
     _spell.export(this);
   }
@@ -43,7 +43,8 @@ class SpellText extends TextSpellExporter implements DoCheck  {
         (exporter.typical != typical) ||
         (exporter.effectExporter.briefText != effectExporter.briefText) ||
         (exporter.modifierExporter.briefText != modifierExporter.briefText) ||
-        (exporter.name != name)){
+        (exporter.castingTime != castingTime) ||
+        (exporter.name != name)) {
       _spell.export(this);
     }
   }

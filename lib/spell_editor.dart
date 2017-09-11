@@ -8,6 +8,7 @@ import 'effectlist_editor.dart';
 import 'modifierlist_editor.dart';
 import 'modifier_editor.dart';
 import 'spell_text.dart';
+import 'drawback_editor.dart';
 
 // AngularDart info: https://webdev.dartlang.org/angular
 // Components info: https://webdev.dartlang.org/components
@@ -29,7 +30,10 @@ typedef RitualModifier Creator();
       <mjw-modifierlist-editor [ritualModifiers]='spell.ritualModifiers'></mjw-modifierlist-editor>
     </div>
     
-    <!-- TODO Add a list for Drawbacks? -->
+    <div>
+      <mjw-drawback-list-editor [drawbacks]='spell.drawbacks'></mjw-drawback-list-editor>
+    </div>
+    
     <div>
       <material-checkbox label='Conditional' [(checked)]='spell.conditional'></material-checkbox>
     </div>
@@ -53,7 +57,8 @@ typedef RitualModifier Creator();
     EffectListEditor,
     ModifierListEditor,
     ModifierEditor,
-    SpellText
+    SpellText,
+    DrawbackListEditor
   ],
   providers: const <dynamic>[materialProviders],
 )

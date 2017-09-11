@@ -40,10 +40,10 @@
     <div *ngSwitchCase="'Area of Effect'">
       <material-checkbox label="Includes" [(checked)]="modifier.includes"></material-checkbox>
       <div>
-        <material-button icon (trigger)='properties["areaOfEffectAdapter"].incrementTargets()'>
+        <material-button icon (trigger)='properties[modifier].incrementTargets()'>
           <glyph icon='add_circle'></glyph>
         </material-button>
-        <material-button icon (trigger)='properties["areaOfEffectAdapter"].decrementTargets()'>
+        <material-button icon (trigger)='properties[modifier].decrementTargets()'>
           <glyph icon='remove_circle'></glyph>
         </material-button>
         <span style="padding-left: 10px;">{{modifier.targets}} Targets</span>
@@ -52,10 +52,10 @@
 
     <div *ngSwitchCase="'Bestows a (Bonus or Penalty)'">
       <material-dropdown-select
-          [options]='properties["bestowsAdapter"].rangeList'
-          [buttonText]='properties["bestowsAdapter"].render(modifier.range)'
-          [selection]='properties["bestowsAdapter"].selectionModel'
-          [itemRenderer]='properties["bestowsAdapter"].render'>
+          [options]='properties[modifier].rangeList'
+          [buttonText]='properties[modifier].render(modifier.range)'
+          [selection]='properties[modifier].selectionModel'
+          [itemRenderer]='properties[modifier].render'>
       </material-dropdown-select>
       <material-input style="width: 100%;" label="ROLL TO MODIFY" floatingLabel [(ngModel)]="modifier.specialization">
       </material-input>
@@ -69,10 +69,10 @@
       <material-checkbox label="Vampiric" [(checked)]="modifier.vampiric"></material-checkbox>
       <div>
         <material-dropdown-select
-            [options]='properties["damageAdapter"].typeList'
-            [buttonText]='properties["damageAdapter"].render(modifier.type)'
-            [selection]='properties["damageAdapter"].selectionModel'
-            [itemRenderer]='properties["damageAdapter"].render'>
+            [options]='properties[modifier].typeList'
+            [buttonText]='properties[modifier].render(modifier.type)'
+            [selection]='properties[modifier].selectionModel'
+            [itemRenderer]='properties[modifier].render'>
         </material-dropdown-select>
         <mjw-traitmodifier-list-editor [traitModifiable]="modifier"></mjw-traitmodifier-list-editor>
       </div>
