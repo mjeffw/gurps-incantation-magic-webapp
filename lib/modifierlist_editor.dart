@@ -8,7 +8,17 @@ typedef RitualModifier Creator();
 @Component(
   selector: 'mjw-modifierlist-editor',
   styleUrls: const ['spell_editor.css'],
-  directives: const [CORE_DIRECTIVES, materialDirectives, ModifierEditor],
+  directives: const [
+    CORE_DIRECTIVES,
+    materialDirectives,
+    ModifierEditor,
+    AutoDismissDirective,
+    AutoFocusDirective,
+    MaterialButtonComponent,
+    MaterialDialogComponent,
+    MaterialIconComponent,
+    ModalComponent,
+  ],
   template: '''
   <div class='left-component-wrap'>
     <material-button icon class='add-btn material-list-item-secondary'
