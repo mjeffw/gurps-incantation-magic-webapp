@@ -2,6 +2,11 @@
     /* This is equivalent of the 'body' selector of a page. */
 }
 
+.info-dialog {
+  min-width: 480px;
+  width: 90%;
+}
+
 .title {
     font-size: larger;
     font-weight: bolder;

@@ -9,6 +9,7 @@ import 'modifierlist_editor.dart';
 import 'modifier_editor.dart';
 import 'spell_text.dart';
 import 'drawback_editor.dart';
+import 'info_popup.dart';
 
 // AngularDart info: https://webdev.dartlang.org/angular
 // Components info: https://webdev.dartlang.org/components
@@ -18,6 +19,7 @@ typedef RitualModifier Creator();
   selector: 'mjw-spell-editor',
   styleUrls: const ['spell_editor.css'],
   template: '''
+    <mjw-info-popup></mjw-info-popup>
     <div>
       <material-input label='SPELL NAME' floatingLabel class='title' [(ngModel)]='spell.name'></material-input>
     </div>
@@ -58,7 +60,8 @@ typedef RitualModifier Creator();
     ModifierListEditor,
     ModifierEditor,
     SpellText,
-    DrawbackListEditor
+    DrawbackListEditor,
+    InfoPopup,
   ],
   providers: const <dynamic>[materialProviders],
 )
