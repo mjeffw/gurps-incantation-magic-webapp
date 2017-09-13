@@ -30,20 +30,19 @@ class ModifierEditor extends TextModifierExporter implements DoCheck {
   set modifier(RitualModifier modifier) {
     _modifier = modifier;
     properties.clear();
-    switch (modifier.runtimeType) {
-      case AreaOfEffect:
-        properties[_modifier] = new AreaOfEffectAdapter(_modifier as AreaOfEffect);
-        break;
-      case Bestows:
-        properties[_modifier] = new BestowsAdapter(_modifier as Bestows);
-        break;
-      case Damage:
-        properties[_modifier] = new DamageAdapter(_modifier as Damage);
+
+    if (modifier is AreaOfEffect) {
+      properties[_modifier] = new AreaOfEffectAdapter(_modifier as AreaOfEffect);
+    } else if (modifier is Bestows) {
+      properties[_modifier] = new BestowsAdapter(_modifier as Bestows);
+    } else if (modifier is Damage) {
+      properties[_modifier] = new DamageAdapter(_modifier as Damage);
     }
+
     _modifier.export(this);
   }
 
-  Map<RitualModifier, dynamic> properties = <RitualModifier,dynamic>{};
+  Map<RitualModifier, dynamic> properties = <RitualModifier, dynamic>{};
 
   void removeModifier() {
     ritualModifiers.removeAt(index);
