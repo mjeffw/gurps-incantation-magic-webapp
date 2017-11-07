@@ -2,6 +2,7 @@ import 'package:angular_components/angular_components.dart';
 import 'package:angular/angular.dart';
 import 'package:gurps_incantation_magic_model/incantation_magic.dart';
 import 'modifier_editor.dart';
+import 'package:observable/observable.dart';
 
 typedef RitualModifier Creator();
 

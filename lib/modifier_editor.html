@@ -1,5 +1,6 @@
 <material-expansionpanel flat [showSaveCancel]='false'
                          name='{{modifier.name}}'
+                         expanded
                          secondaryText='{{details[0].detailText}} ({{modifier.spellPoints}})'>
   <div value class='valueClass left-component-wrap'>
     <span class='right-component'>
@@ -11,9 +12,9 @@
   <span [ngSwitch]="modifier.name">
     <span *ngIf="modifier.name != 'Affliction, Stunning'">
       <div style="padding-bottom: 12px;">
-        <material-button icon (trigger)='modifier.incrementSpellPoints()'><glyph icon='add_circle'></glyph></material-button>
-        <material-button icon (trigger)='modifier.decrementSpellPoints()'><glyph icon='remove_circle'></glyph></material-button>
-        <span style="padding-left: 10px;">{{modifier.spellPoints}} SP</span>
+        <material-button [disabled]='!modifier.canDecrement' icon (trigger)='modifier.decrementSpellPoints()'><material-icon baseline icon='remove_circle'></material-icon></material-button>
+        <span>{{modifier.spellPoints}} SP</span>
+        <material-button [disabled]="!modifier.canIncrement" icon (trigger)='modifier.incrementSpellPoints()'><material-icon baseline icon='add_circle'></material-icon></material-button>
       </div>
     </span>
 
