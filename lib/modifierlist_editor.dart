@@ -13,12 +13,12 @@ typedef RitualModifier Creator();
     CORE_DIRECTIVES,
     materialDirectives,
     ModifierEditor,
-    AutoDismissDirective,
-    AutoFocusDirective,
-    MaterialButtonComponent,
-    MaterialDialogComponent,
-    MaterialIconComponent,
-    ModalComponent,
+//    AutoDismissDirective,
+//    AutoFocusDirective,
+//    MaterialButtonComponent,
+//    MaterialDialogComponent,
+//    MaterialIconComponent,
+//    ModalComponent,
   ],
   template: '''
   <div class='left-component-wrap'>
@@ -34,12 +34,10 @@ typedef RitualModifier Creator();
   <modal [visible]='showModifierDialog'>
     <material-dialog class='basic-dialog'>
       <h3 header>Select Ritual Modifier</h3>
-      <material-dropdown-select
-          autofocus
-          [buttonText]='modifierSelectModel.selectedValues.first'
-          [selection]='modifierSelectModel'
-          [options]='modifierOptions'>
-      </material-dropdown-select>
+
+      <material-select [options]="multiOptions" [selection]="multiSelectModel" [itemRenderer]="renderer" class="bordered-list">
+      </material-select>
+      
       <div footer>
         <material-button (trigger)='showModifierDialog = false' class='white'>
            CANCEL
@@ -88,8 +86,14 @@ class ModifierListEditor {
   final SelectionModel<String> modifierSelectModel =
       new SelectionModel.withList(selectedValues: [map.keys.toList(growable: false)[0]]);
 
+  final ItemRenderer<String> renderer = (String item) => item;
+  final SelectionOptions<String> multiOptions = new SelectionOptions<String>.fromList(map.keys.toList(growable: false));
+  final SelectionModel<String> multiSelectModel =
+      new SelectionModel<String>.withList(selectedValues: <String>[], allowMulti: true);
+
   void addModifier() {
-    ritualModifiers.add(map[modifierSelectModel.selectedValues.first]());
+    multiSelectModel.selectedValues.forEach((it) => ritualModifiers.add(map[it]()));
+    multiSelectModel.clear();
     showModifierDialog = false;
   }
 }
