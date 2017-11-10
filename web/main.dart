@@ -2,7 +2,7 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'package:angular/angular.dart';
-import 'package:ng_materialdesign_sandbox/spell_editor.dart';
+import 'package:gurps_incantation_magic_webapp/spell_editor.dart';
 
 void main() {
   bootstrap(SpellEditor);

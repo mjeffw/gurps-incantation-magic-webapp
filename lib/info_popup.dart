@@ -27,12 +27,18 @@ import 'package:angular_components/angular_components.dart';
     
           <h3>About the Dungeon Fantasy Incanter's Aid</h3>
         </div>
-        <p>
-        This aid helps players of <i>GURPS Dungeon Fantasy</i> or the <i>Dungeon Fantasy Roleplaying Game</i> create
-        and calculate the spell point cost of incantations built using the optional Incantation Magic system, as 
-        described in <a href="http://www.sjgames.com/gurps/books/dungeonfantasy/dungeonfantasy19/">Dungeon Fantasy
-        19 Incantation Magic</a>. A purchased copy of that PDF is required. 
-        </p>
+        
+        <div style="display:table;"> <!-- <div class='t'> -->
+          <div style="display:table-cell;vertical-align:middle;"> <!-- <div class='imgcontainer'> -->
+            <img src="apple-icon-72x72.png">
+          </div>
+          <p style="padding-left: 5px">
+          Players of <i>GURPS Dungeon Fantasy</i> or the <i>Dungeon Fantasy Roleplaying Game</i> may use this aid to create
+          and calculate the spell point cost of incantations built using the optional Incantation Magic system, described in <a href="http://www.sjgames.com/gurps/books/dungeonfantasy/dungeonfantasy19/">Dungeon Fantasy
+          19 Incantation Magic</a>. A copy of that PDF is required. 
+          </p>
+        </div>
+        
         <p style='font-size: smaller;'>
         <i>GURPS</i> and <i>Dungeon Fantasy Roleplaying Game</i> are trademarks of Steve Jackson Games, and its rules 
         and art are copyrighted by Steve Jackson Games. All rights are reserved by Steve Jackson Games. This game aid 

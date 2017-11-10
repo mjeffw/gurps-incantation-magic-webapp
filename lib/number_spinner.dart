@@ -21,6 +21,11 @@ class NumberSpinner {
   @Input()
   String label;
 
-  void increment() { value++; }
-  void decrement() { value--; }
+  void increment() {
+    value++;
+  }
+
+  void decrement() {
+    value--;
+  }
 }
