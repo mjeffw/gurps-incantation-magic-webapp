@@ -13,12 +13,6 @@ typedef RitualModifier Creator();
     CORE_DIRECTIVES,
     materialDirectives,
     ModifierEditor,
-//    AutoDismissDirective,
-//    AutoFocusDirective,
-//    MaterialButtonComponent,
-//    MaterialDialogComponent,
-//    MaterialIconComponent,
-//    ModalComponent,
   ],
   template: '''
   <div class='left-component-wrap'>
@@ -80,11 +74,6 @@ class ModifierListEditor {
   List<RitualModifier> ritualModifiers;
 
   bool showModifierDialog = false;
-
-  final SelectionOptions<String> modifierOptions = new SelectionOptions.fromList(map.keys.toList(growable: false));
-
-  final SelectionModel<String> modifierSelectModel =
-      new SelectionModel.withList(selectedValues: [map.keys.toList(growable: false)[0]]);
 
   final ItemRenderer<String> renderer = (String item) => item;
   final SelectionOptions<String> multiOptions = new SelectionOptions<String>.fromList(map.keys.toList(growable: false));
