@@ -12,9 +12,9 @@
   <span [ngSwitch]="modifier.name">
     <span *ngIf="modifier.name != 'Affliction, Stunning'">
       <div style="padding-bottom: 12px;">
-        <material-button [disabled]='!modifier.canDecrement' icon (trigger)='modifier.decrementSpellPoints()'><material-icon baseline icon='remove_circle'></material-icon></material-button>
+        <material-button [disabled]='!modifier.canDecrementValue' icon (trigger)='modifier.decrementValue()'><material-icon baseline icon='remove_circle'></material-icon></material-button>
         <span>{{modifier.spellPoints}} SP</span>
-        <material-button [disabled]="!modifier.canIncrement" icon (trigger)='modifier.incrementSpellPoints()'><material-icon baseline icon='add_circle'></material-icon></material-button>
+        <material-button [disabled]="!modifier.canIncrementValue" icon (trigger)='modifier.incrementValue()'><material-icon baseline icon='add_circle'></material-icon></material-button>
       </div>
     </span>
 
@@ -29,11 +29,22 @@
     </div>
 
     <div *ngSwitchCase="'Altered Traits'">
-      <material-input style="width: 80%;" label="TRAIT" floatingLabel [(ngModel)]="modifier.specialization">
-      </material-input>
-      <material-input style="width: 10%;" type="number" checkInteger label="LEVEL" floatingLabel rightAlign
-                      [(ngModel)]="modifier.specLevel">
-      </material-input>
+      <div style="display:table;">
+        <material-input style="display:table-cell;vertical-align:middle;width:75%" label="TRAIT" floatingLabel
+                        [(ngModel)]="modifier.trait.name"></material-input>
+        <material-input style="display:table-cell;vertical-align:middle;width:20%;padding-left:10px" type='number'
+                        checkInteger label="BASE COST" floatingLabel rightAlign
+                        [(ngModel)]="modifier.trait.baseCost"></material-input>
+      </div>
+      <div style="display:table;">
+        <material-checkbox label="Has Levels" [(checked)]='modifier.trait.hasLevels'></material-checkbox>
+        <material-input style="display:table-cell;vertical-align:middle;padding-left:10px;width:20%" type='number'
+                        checkInteger label="COST/LEVEL" floatingLabel rightAlign [disabled]='!modifier.trait.hasLevels'
+                        [(ngModel)]="modifier.trait.costPerLevel"></material-input>
+        <material-input style="display:table-cell;vertical-align:middle;padding-left:10px;width:20%" type='number'
+                        checkInteger label="LEVELS" floatingLabel rightAlign [disabled]='!modifier.trait.hasLevels'
+                        [(ngModel)]="modifier.trait.levels"></material-input>
+      </div>
       <mjw-traitmodifier-list-editor [traitModifiable]="modifier"></mjw-traitmodifier-list-editor>
     </div>
 

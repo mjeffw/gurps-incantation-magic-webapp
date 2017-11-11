@@ -31,7 +31,9 @@ class ModifierEditor extends TextModifierExporter implements DoCheck {
     _modifier = modifier;
     properties.clear();
 
-    if (modifier is AreaOfEffect) {
+    if (modifier is AlteredTraits) {
+      properties[_modifier] = new AlteredTraitsAdapter(_modifier as AlteredTraits);
+    } else if (modifier is AreaOfEffect) {
       properties[_modifier] = new AreaOfEffectAdapter(_modifier as AreaOfEffect);
     } else if (modifier is Bestows) {
       properties[_modifier] = new BestowsAdapter(_modifier as Bestows);
@@ -53,11 +55,34 @@ class ModifierEditor extends TextModifierExporter implements DoCheck {
     TextModifierExporter exporter = new TextModifierExporter();
     _modifier.export(exporter);
 
+    print(exporter.details[0].detailText);
+    print(details[0].detailText);
+
     if ((exporter.details[0].detailText != details[0].detailText) || (exporter.briefText != briefText)) {
       this.clear();
       _modifier.export(this);
     }
   }
+}
+
+class AlteredTraitsAdapter {
+  AlteredTraitsAdapter(this._traits);
+  AlteredTraits _traits;
+
+  bool get hasLevels => _traits.trait.hasLevels;
+  set hasLevels(bool b) => _traits.trait.hasLevels = b;
+
+  String get traitName => _traits.trait.name;
+  set traitName(String n) => _traits.trait.name = n;
+
+  int get baseCost => _traits.trait.baseCost;
+  set baseCost(int x) => _traits.trait.baseCost = x;
+
+  int get levels => _traits.trait.levels;
+  set levels(int x) => _traits.trait.levels = x;
+
+  int get costPerLevel => _traits.trait.costPerLevel;
+  set costPerLevel(int x) => _traits.trait.costPerLevel = x;
 }
 
 class AreaOfEffectAdapter {

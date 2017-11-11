@@ -54,7 +54,7 @@ class ModifierListEditor {
   static Map<String, Creator> map = {
     "Afflictions": () => new Affliction(null),
     "Afflictions (Stun)": () => new AfflictionStun(),
-    "Altered Traits": () => new AlteredTraits(null, 0),
+    "Altered Traits": () => new AlteredTraits(new Trait(name:'')),
     "Area of Effect": () => new AreaOfEffect(),
     "Bestows a (Bonus or Penalty)": () => new Bestows(null),
     "Damage": () => new Damage(),
