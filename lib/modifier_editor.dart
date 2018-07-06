@@ -7,7 +7,7 @@ import 'traitmodifier_list_editor.dart';
   selector: 'mjw-modifier-editor',
   styleUrls: const ['spell_editor.css'],
   directives: const <dynamic>[
-    COMMON_DIRECTIVES,
+    coreDirectives,
     materialDirectives,
     materialInputDirectives,
     MaterialNumberValueAccessor,
@@ -116,7 +116,7 @@ class BestowsAdapter {
   BestowsAdapter(this._modifier);
 
   SelectionModel<BestowsRange> get selectionModel {
-    SelectionModel<BestowsRange> model = new SelectionModel.withList(selectedValues: [_modifier.range]);
+    SelectionModel<BestowsRange> model = new SelectionModel.single(selected: _modifier.range);
     model.selectionChanges.listen(onData);
     return model;
   }
@@ -136,7 +136,7 @@ class DamageAdapter {
   SelectionOptions<DamageType> typeList = new SelectionOptions.fromList(DamageType.values);
 
   SelectionModel<DamageType> get selectionModel {
-    SelectionModel<DamageType> model = new SelectionModel.withList(selectedValues: [_modifier.type]);
+    SelectionModel<DamageType> model = new SelectionModel.single(selected: _modifier.type);
     model.selectionChanges.listen(onData);
     return model;
   }

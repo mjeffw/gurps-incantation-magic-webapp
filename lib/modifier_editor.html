@@ -21,7 +21,7 @@
     <div *ngSwitchDefault></div>
 
     <div *ngSwitchCase="'Afflictions'">
-      <material-input style="width: 80%;" label="EFFECT" floatingLabel [(ngModel)]="modifier.specialization">
+      <material-input style="width: 80%;" label="EFFECT" floatingLabel [(ngModel)]="modifier.asHasSpecialization().specialization">
       </material-input>
       <material-input style="width: 10%;" type="number" checkInteger trailingText="%" rightAlign
                       [(ngModel)]="modifier.value">
@@ -31,26 +31,26 @@
     <div *ngSwitchCase="'Altered Traits'">
       <div style="display:table;">
         <material-input style="display:table-cell;vertical-align:middle;width:75%" label="TRAIT" floatingLabel
-                        [(ngModel)]="modifier.trait.name"></material-input>
+                        [(ngModel)]="modifier.asHasTrait().trait.name"></material-input>
         <material-input style="display:table-cell;vertical-align:middle;width:20%;padding-left:10px" type='number'
                         checkInteger label="BASE COST" floatingLabel rightAlign
-                        [(ngModel)]="modifier.trait.baseCost"></material-input>
+                        [(ngModel)]="modifier.asHasTrait().trait.baseCost"></material-input>
       </div>
       <div style="display:table;">
-        <material-checkbox label="Has Levels" [(checked)]='modifier.trait.hasLevels'></material-checkbox>
+        <material-checkbox label="Has Levels" [(checked)]='modifier.asHasTrait().trait.hasLevels'></material-checkbox>
         <material-input style="display:table-cell;vertical-align:middle;padding-left:10px;width:20%" type='number'
-                        checkInteger label="COST/LEVEL" floatingLabel rightAlign [disabled]='!modifier.trait.hasLevels'
-                        [(ngModel)]="modifier.trait.costPerLevel"></material-input>
+                        checkInteger label="COST/LEVEL" floatingLabel rightAlign [disabled]='!modifier.asHasTrait().trait.hasLevels'
+                        [(ngModel)]="modifier.asHasTrait().trait.costPerLevel"></material-input>
         <material-input style="display:table-cell;vertical-align:middle;padding-left:10px;width:20%" type='number'
-                        checkInteger label="LEVELS" floatingLabel rightAlign [disabled]='!modifier.trait.hasLevels'
-                        [(ngModel)]="modifier.trait.levels"></material-input>
+                        checkInteger label="LEVELS" floatingLabel rightAlign [disabled]='!modifier.asHasTrait().trait.hasLevels'
+                        [(ngModel)]="modifier.asHasTrait().trait.levels"></material-input>
       </div>
-      <mjw-traitmodifier-list-editor [traitModifiable]="modifier"></mjw-traitmodifier-list-editor>
+      <mjw-traitmodifier-list-editor [traitModifiable]="modifier.asTraitModifiable()"></mjw-traitmodifier-list-editor>
     </div>
 
 
     <div *ngSwitchCase="'Area of Effect'">
-      <material-checkbox label="Includes" [(checked)]="modifier.includes"></material-checkbox>
+      <material-checkbox label="Includes" [(checked)]="modifier.asAreaOfEffect().includes"></material-checkbox>
       <div>
         <material-button icon (trigger)='properties[modifier].incrementTargets()'>
           <glyph icon='add_circle'></glyph>
@@ -58,35 +58,35 @@
         <material-button icon (trigger)='properties[modifier].decrementTargets()'>
           <glyph icon='remove_circle'></glyph>
         </material-button>
-        <span style="padding-left: 10px;">{{modifier.targets}} Targets</span>
+        <span style="padding-left: 10px;">{{modifier.asAreaOfEffect().targets}} Targets</span>
       </div>
     </div>
 
     <div *ngSwitchCase="'Bestows a (Bonus or Penalty)'">
       <material-dropdown-select
           [options]='properties[modifier].rangeList'
-          [buttonText]='properties[modifier].render(modifier.range)'
+          [buttonText]='properties[modifier].render(modifier.asHasBestowsRange().range)'
           [selection]='properties[modifier].selectionModel'
           [itemRenderer]='properties[modifier].render'>
       </material-dropdown-select>
-      <material-input style="width: 100%;" label="ROLL TO MODIFY" floatingLabel [(ngModel)]="modifier.specialization">
+      <material-input style="width: 100%;" label="ROLL TO MODIFY" floatingLabel [(ngModel)]="modifier.asHasSpecialization().specialization">
       </material-input>
     </div>
 
     <div *ngSwitchCase="'Damage'">
-      <material-checkbox label="Direct" [(checked)]="modifier.direct"></material-checkbox>
+      <material-checkbox label="Direct" [(checked)]="modifier.asDamage().direct"></material-checkbox>
       <material-checkbox label="Explosive"
-                         [disabled]="modifier.direct"
-                       [(checked)]="modifier.explosive"></material-checkbox>
-      <material-checkbox label="Vampiric" [(checked)]="modifier.vampiric"></material-checkbox>
+                         [disabled]="modifier.asDamage().direct"
+                       [(checked)]="modifier.asDamage().explosive"></material-checkbox>
+      <material-checkbox label="Vampiric" [(checked)]="modifier.asDamage().vampiric"></material-checkbox>
       <div>
         <material-dropdown-select
             [options]='properties[modifier].typeList'
-            [buttonText]='properties[modifier].render(modifier.type)'
+            [buttonText]='properties[modifier].render(modifier.asDamage().type)'
             [selection]='properties[modifier].selectionModel'
             [itemRenderer]='properties[modifier].render'>
         </material-dropdown-select>
-        <mjw-traitmodifier-list-editor [traitModifiable]="modifier"></mjw-traitmodifier-list-editor>
+        <mjw-traitmodifier-list-editor [traitModifiable]="modifier.asTraitModifiable()"></mjw-traitmodifier-list-editor>
       </div>
     </div>
 
