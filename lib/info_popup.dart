@@ -31,7 +31,7 @@ import 'package:angular_components/angular_components.dart';
         <div>
           <div style="display:table;"> <!-- <div class='t'> -->
             <div style="display:table-cell;vertical-align:middle;"> <!-- <div class='imgcontainer'> -->
-              <img src="apple-icon-60x60.png">
+              <img src="apple-icon-57x57.png">
             </div>
             <p style="padding-left: 5px">
             Players of <i>GURPS Dungeon Fantasy</i> or the <i>Dungeon Fantasy Roleplaying Game</i> may use this aid to create

@@ -12,12 +12,6 @@ dependencies:
   angular_components: ^0.9.0-beta
   gurps_incantation_magic_model:
       path: ../gurps-incantation-magic-dart
-#  html: ^0.13.3+1
-#  watcher: ^0.9.7+9
-#  utf: ^0.9.0+4
-#  pool: ^1.3.5
-#  web_socket_channel: ^1.0.8
-#  mime: ^0.9.6+1
   built_collection: ^3.1.1
   quiver: '>=0.29.0 <0.30.0'
 
