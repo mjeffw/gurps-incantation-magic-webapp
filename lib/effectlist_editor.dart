@@ -5,7 +5,7 @@ import 'package:gurps_incantation_magic_model/incantation_magic.dart';
 @Component(
   selector: 'mjw-effectlist-editor',
   styleUrls: const ['spell_editor.css'],
-  directives: const <dynamic>[CORE_DIRECTIVES, materialDirectives],
+  directives: const <dynamic>[coreDirectives, materialDirectives],
   template: '''
       <!-- Spell Effects table -->
       <div class='left-component-wrap'>
@@ -16,15 +16,9 @@ import 'package:gurps_incantation_magic_model/incantation_magic.dart';
       </div>
       <material-list>
         <material-list-item *ngFor='let item of effects; let i = index'>
-          <material-dropdown-select
-                  [options]='effectList'
-                  [buttonText]='item.effect.name'
-                  [selection]='effectSelectModels[i]'>
+          <material-dropdown-select [options]='effectList' [buttonText]='item.effect.name' [selection]='effectSelectModels[i]'>
           </material-dropdown-select>
-          <material-dropdown-select
-                [options]='pathList'
-                [buttonText]='item.path.name'
-                [selection]='pathSelectModels[i]'>
+          <material-dropdown-select [options]='pathList' [buttonText]='item.path.name' [selection]='pathSelectModels[i]'>
           </material-dropdown-select>
           <material-button icon class='material-list-item-secondary' (trigger)='removeEffect(i)'>
             <glyph icon='remove_circle' class='remove-button'></glyph>
@@ -54,28 +48,36 @@ class EffectListEditor {
   void _fillOutModelLists() {
     pathSelectModels.clear();
     effectSelectModels.clear();
-    effects.forEach((e) => _createSelectionModels(e));
+    effects.forEach((e) => _createSelectionModels(effects.indexOf(e)));
   }
 
-  void _createSelectionModels(SpellEffect e) {
-    SelectionModel<Effect> effectSelectionModel = new SelectionModel.withList(selectedValues: [e.effect]);
-    effectSelectionModel.selectionChanges.listen((list) {
-      list.forEach((r) => _changeEffectSelection(r, e, effectSelectModels.indexOf(effectSelectionModel)));
-    });
-    effectSelectModels.add(effectSelectionModel);
+  void _createSelectionModels(int index) {
+    SpellEffect e = effects[index];
 
-    SelectionModel<Path> pathSelectionModel = new SelectionModel.withList(selectedValues: [e.path]);
-    pathSelectionModel.selectionChanges.listen((list){
-      list.forEach((r) => _changePathSelection(r, e, effects.indexOf(e)));
-    });
-    pathSelectModels.add(pathSelectionModel);
+    {
+      SelectionModel<Path> pathSelectionModel =
+          new SelectionModel.single(selected: e.path);
+      pathSelectionModel.selectionChanges.listen((aa) {
+        aa.forEach((ar) => _changePathSelection(ar, index));
+      });
+      pathSelectModels.add(pathSelectionModel);
+    }
+
+    {
+      SelectionModel<Effect> effectSelectionModel =
+          new SelectionModel.single(selected: e.effect);
+      effectSelectionModel.selectionChanges.listen((bb) {
+        bb.forEach((br) => _changeEffectSelection(br, index));
+      });
+      effectSelectModels.add(effectSelectionModel);
+    }
   }
 
   // == Effect add/remove button support ==
   void addEffect() {
     SpellEffect e = new SpellEffect(Effect.Sense, Path.Arcanum);
-    _createSelectionModels(e);
     effects.add(e);
+    _createSelectionModels(effects.indexOf(e));
   }
 
   void removeEffect(int index) {
@@ -84,10 +86,11 @@ class EffectListEditor {
   }
 
   // == Effect dropdown select support ==
-  SelectionOptions<Effect> effectList = new SelectionOptions.fromList(Effect.values);
+  SelectionOptions<Effect> effectList =
+      new SelectionOptions.fromList(Effect.values);
   final List<SelectionModel<Effect>> effectSelectModels = [];
 
-  void _changeEffectSelection(SelectionChangeRecord<Effect> item, SpellEffect effect, int index) {
+  void _changeEffectSelection(SelectionChangeRecord<Effect> item, int index) {
     effects[index].effect = item.added.first;
   }
 
@@ -95,7 +98,7 @@ class EffectListEditor {
   SelectionOptions<Path> pathList = new SelectionOptions.fromList(Path.values);
   final List<SelectionModel<Path>> pathSelectModels = [];
 
-  void _changePathSelection(SelectionChangeRecord<Path> item, SpellEffect e, int index) {
+  void _changePathSelection(SelectionChangeRecord<Path> item, int index) {
     effects[index].path = item.added.first;
   }
 }

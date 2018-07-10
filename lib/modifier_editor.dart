@@ -1,14 +1,13 @@
 import 'package:angular_components/angular_components.dart';
 import 'package:angular/angular.dart';
 import 'package:gurps_incantation_magic_model/incantation_magic.dart';
-import 'exporter/web_exporter.dart';
-import 'package:ng_materialdesign_sandbox/traitmodifier_list_editor.dart';
+import 'traitmodifier_list_editor.dart';
 
 @Component(
   selector: 'mjw-modifier-editor',
   styleUrls: const ['spell_editor.css'],
   directives: const <dynamic>[
-    COMMON_DIRECTIVES,
+    coreDirectives,
     materialDirectives,
     materialInputDirectives,
     MaterialNumberValueAccessor,
@@ -17,9 +16,9 @@ import 'package:ng_materialdesign_sandbox/traitmodifier_list_editor.dart';
   templateUrl: 'modifier_editor.html',
   providers: const <dynamic>[materialProviders],
 )
-class ModifierEditor {
+class ModifierEditor extends TextModifierExporter implements DoCheck {
   @Input()
-  Spell spell;
+  List<RitualModifier> ritualModifiers;
 
   @Input()
   int index;
@@ -31,36 +30,64 @@ class ModifierEditor {
   set modifier(RitualModifier modifier) {
     _modifier = modifier;
     properties.clear();
-    switch (modifier.runtimeType) {
-      case AreaOfEffect:
-        properties['areaOfEffectAdapter'] = new AreaOfEffectAdapter(_modifier as AreaOfEffect, this);
-        break;
-      case Bestows:
-        properties['bestowsAdapter'] = new BestowsAdapter(_modifier as Bestows);
-        break;
-      case Damage:
-        properties['damageAdapter'] = new DamageAdapter(_modifier as Damage);
+
+    if (modifier is AlteredTraits) {
+      properties[_modifier] = new AlteredTraitsAdapter(_modifier as AlteredTraits);
+    } else if (modifier is AreaOfEffect) {
+      properties[_modifier] = new AreaOfEffectAdapter(_modifier as AreaOfEffect);
+    } else if (modifier is Bestows) {
+      properties[_modifier] = new BestowsAdapter(_modifier as Bestows);
+    } else if (modifier is Damage) {
+      properties[_modifier] = new DamageAdapter(_modifier as Damage);
     }
-    _modifier.export(exporter);
+
+    _modifier.export(this);
   }
 
-  WebModifierExporter exporter = new WebModifierExporter();
-  Map<String, dynamic> properties = new Map<String, dynamic>();
+  Map<RitualModifier, dynamic> properties = <RitualModifier, dynamic>{};
 
   void removeModifier() {
-    spell.ritualModifiers.removeAt(index);
+    ritualModifiers.removeAt(index);
   }
 
-  String get typicalText {
+  @override
+  void ngDoCheck() {
+    TextModifierExporter exporter = new TextModifierExporter();
     _modifier.export(exporter);
-    return exporter.detail.typicalText;
+
+    print(exporter.details[0].detailText);
+    print(details[0].detailText);
+
+    if ((exporter.details[0].detailText != details[0].detailText) || (exporter.briefText != briefText)) {
+      this.clear();
+      _modifier.export(this);
+    }
   }
+}
+
+class AlteredTraitsAdapter {
+  AlteredTraitsAdapter(this._traits);
+  AlteredTraits _traits;
+
+  bool get hasLevels => _traits.trait.hasLevels;
+  set hasLevels(bool b) => _traits.trait.hasLevels = b;
+
+  String get traitName => _traits.trait.name;
+  set traitName(String n) => _traits.trait.name = n;
+
+  int get baseCost => _traits.trait.baseCost;
+  set baseCost(int x) => _traits.trait.baseCost = x;
+
+  int get levels => _traits.trait.levels;
+  set levels(int x) => _traits.trait.levels = x;
+
+  int get costPerLevel => _traits.trait.costPerLevel;
+  set costPerLevel(int x) => _traits.trait.costPerLevel = x;
 }
 
 class AreaOfEffectAdapter {
   AreaOfEffect _area;
-  ModifierEditor _component;
-  AreaOfEffectAdapter(this._area, this._component);
+  AreaOfEffectAdapter(this._area);
 
   void incrementTargets() {
     _area.targets++;
@@ -73,7 +100,6 @@ class AreaOfEffectAdapter {
   bool get includes => _area.includes;
   set includes(bool value) {
     _area.includes = value;
-    _area.export(_component.exporter);
   }
 }
 
@@ -90,7 +116,7 @@ class BestowsAdapter {
   BestowsAdapter(this._modifier);
 
   SelectionModel<BestowsRange> get selectionModel {
-    SelectionModel<BestowsRange> model = new SelectionModel.withList(selectedValues: [_modifier.range]);
+    SelectionModel<BestowsRange> model = new SelectionModel.single(selected: _modifier.range);
     model.selectionChanges.listen(onData);
     return model;
   }
@@ -110,7 +136,7 @@ class DamageAdapter {
   SelectionOptions<DamageType> typeList = new SelectionOptions.fromList(DamageType.values);
 
   SelectionModel<DamageType> get selectionModel {
-    SelectionModel<DamageType> model = new SelectionModel.withList(selectedValues: [_modifier.type]);
+    SelectionModel<DamageType> model = new SelectionModel.single(selected: _modifier.type);
     model.selectionChanges.listen(onData);
     return model;
   }

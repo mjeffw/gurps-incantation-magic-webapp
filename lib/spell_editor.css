@@ -2,6 +2,11 @@
     /* This is equivalent of the 'body' selector of a page. */
 }
 
+.info-dialog {
+  min-width: 480px;
+  width: 90%;
+}
+
 .title {
     font-size: larger;
     font-weight: bolder;
@@ -191,6 +196,15 @@
 
 .blue:not([disabled]) {
   background-color: #2196F3;
+  color: white;
+}
+
+.red:not([raised]):not([disabled]) {
+  color: #f44336;
+}
+
+.red[raised]:not([disabled]) {
+  background-color: #f44336;
   color: white;
 }
 

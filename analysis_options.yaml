@@ -4,6 +4,9 @@ analyzer:
     implicit-dynamic: false
   errors:
     todo: ignore
+    uri_has_not_been_generated: ignore
+    plugins:
+      - angular
   exclude:
     - flutter/**
     - lib/api/*.dart
