@@ -5,7 +5,7 @@ import 'package:gurps_incantation_magic_model/incantation_magic.dart';
 @Component(
   selector: 'mjw-effectlist-editor',
   styleUrls: const ['spell_editor.css'],
-  directives: const <dynamic>[CORE_DIRECTIVES, materialDirectives],
+  directives: const <dynamic>[coreDirectives, materialDirectives],
   template: '''
       <!-- Spell Effects table -->
       <div class='left-component-wrap'>
@@ -55,7 +55,8 @@ class EffectListEditor {
     SpellEffect e = effects[index];
 
     {
-      SelectionModel<Path> pathSelectionModel = new SelectionModel.withList(selectedValues: [e.path]);
+      SelectionModel<Path> pathSelectionModel =
+          new SelectionModel.single(selected: e.path);
       pathSelectionModel.selectionChanges.listen((aa) {
         aa.forEach((ar) => _changePathSelection(ar, index));
       });
@@ -63,7 +64,8 @@ class EffectListEditor {
     }
 
     {
-      SelectionModel<Effect> effectSelectionModel = new SelectionModel.withList(selectedValues: [e.effect]);
+      SelectionModel<Effect> effectSelectionModel =
+          new SelectionModel.single(selected: e.effect);
       effectSelectionModel.selectionChanges.listen((bb) {
         bb.forEach((br) => _changeEffectSelection(br, index));
       });
@@ -84,7 +86,8 @@ class EffectListEditor {
   }
 
   // == Effect dropdown select support ==
-  SelectionOptions<Effect> effectList = new SelectionOptions.fromList(Effect.values);
+  SelectionOptions<Effect> effectList =
+      new SelectionOptions.fromList(Effect.values);
   final List<SelectionModel<Effect>> effectSelectModels = [];
 
   void _changeEffectSelection(SelectionChangeRecord<Effect> item, int index) {

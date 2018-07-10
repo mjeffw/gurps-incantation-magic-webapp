@@ -2,8 +2,8 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'package:angular/angular.dart';
-import 'package:gurps_incantation_magic_webapp/spell_editor.dart';
+import 'package:gurps_incantation_magic_webapp/spell_editor.template.dart' as ng;
 
 void main() {
-  bootstrap(SpellEditor);
+  runApp(ng.SpellEditorNgFactory);
 }

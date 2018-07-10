@@ -6,7 +6,7 @@ import 'package:gurps_incantation_magic_model/incantation_magic.dart';
   selector: 'mjw-drawback-list-editor',
   styleUrls: const ['spell_editor.css'],
   directives: const <dynamic>[
-    CORE_DIRECTIVES,
+    coreDirectives,
     materialDirectives,
     materialInputDirectives,
     MaterialNumberValueAccessor,

@@ -5,7 +5,7 @@ import 'package:gurps_incantation_magic_model/incantation_magic.dart';
 @Component(
   selector: 'mjw-spell-text',
   styleUrls: const ['spell_editor.css'],
-  directives: const <dynamic>[CORE_DIRECTIVES, materialDirectives],
+  directives: const <dynamic>[materialDirectives],
   template: '''
   <h3><i>{{name}}</i></h3>
   <div>
@@ -23,7 +23,7 @@ import 'package:gurps_incantation_magic_model/incantation_magic.dart';
   </p>
   </div>
   ''',
-  providers: const <dynamic>[materialProviders],
+  providers: const <dynamic>[coreDirectives, materialProviders],
 )
 class SpellText extends TextSpellExporter implements DoCheck {
   Spell _spell;

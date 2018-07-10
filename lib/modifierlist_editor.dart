@@ -2,7 +2,6 @@ import 'package:angular_components/angular_components.dart';
 import 'package:angular/angular.dart';
 import 'package:gurps_incantation_magic_model/incantation_magic.dart';
 import 'modifier_editor.dart';
-import 'package:observable/observable.dart';
 
 typedef RitualModifier Creator();
 
@@ -10,7 +9,7 @@ typedef RitualModifier Creator();
   selector: 'mjw-modifierlist-editor',
   styleUrls: const ['spell_editor.css'],
   directives: const [
-    CORE_DIRECTIVES,
+    coreDirectives,
     materialDirectives,
     ModifierEditor,
   ],
@@ -78,7 +77,7 @@ class ModifierListEditor {
   final ItemRenderer<String> renderer = (String item) => item;
   final SelectionOptions<String> multiOptions = new SelectionOptions<String>.fromList(map.keys.toList(growable: false));
   final SelectionModel<String> multiSelectModel =
-      new SelectionModel<String>.withList(selectedValues: <String>[], allowMulti: true);
+      new SelectionModel<String>.multi(selectedValues: <String>[]);
 
   void addModifier() {
     multiSelectModel.selectedValues.forEach((it) => ritualModifiers.add(map[it]()));
