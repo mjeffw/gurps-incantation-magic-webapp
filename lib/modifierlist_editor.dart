@@ -74,7 +74,7 @@ class ModifierListEditor {
 
   bool showModifierDialog = false;
 
-  final ItemRenderer<String> renderer = (dynamic item) => item;
+  final ItemRenderer<String> renderer = (dynamic item) => item.toString();
   final SelectionOptions<String> multiOptions = new SelectionOptions<String>.fromList(map.keys.toList(growable: false));
   final SelectionModel<String> multiSelectModel =
       new SelectionModel<String>.multi(selectedValues: <String>[]);
