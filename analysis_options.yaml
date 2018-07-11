@@ -5,8 +5,8 @@ analyzer:
   errors:
     todo: ignore
     uri_has_not_been_generated: ignore
-    plugins:
-      - angular
+  plugins:
+    - angular
   exclude:
     - flutter/**
     - lib/api/*.dart
@@ -31,4 +31,3 @@ linter:
     - one_member_abstracts
     - slash_for_doc_comments
     - sort_constructors_first
-    - unnecessary_brace_in_string_interp
