@@ -16,7 +16,10 @@ import 'package:gurps_incantation_magic_model/incantation_magic.dart';
       </div>
       <material-list>
         <material-list-item *ngFor='let item of effects; let i = index'>
-          <material-dropdown-select [options]='effectList' [buttonText]='item.effect.name' [selection]='effectSelectModels[i]'>
+          <material-dropdown-select 
+            [options]='effectList' 
+            [buttonText]='item.effect.name' 
+            [selection]='effectSelectModels[i]'>
           </material-dropdown-select>
           <material-dropdown-select [options]='pathList' [buttonText]='item.path.name' [selection]='pathSelectModels[i]'>
           </material-dropdown-select>
