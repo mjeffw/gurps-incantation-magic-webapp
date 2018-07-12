@@ -5,5 +5,6 @@ import 'package:angular/angular.dart';
 import 'package:gurps_incantation_magic_webapp/spell_editor.template.dart' as ng;
 
 void main() {
-  runApp(ng.SpellEditorNgFactory);
+  ComponentFactory<ng.SpellEditor> factory = ng.SpellEditorNgFactory;
+  runApp<ng.SpellEditor>(factory);
 }
