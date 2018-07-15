@@ -32,9 +32,11 @@ class ModifierEditor extends TextModifierExporter implements DoCheck {
     properties.clear();
 
     if (modifier is AlteredTraits) {
-      properties[_modifier] = new AlteredTraitsAdapter(_modifier as AlteredTraits);
+      properties[_modifier] =
+          new AlteredTraitsAdapter(_modifier as AlteredTraits);
     } else if (modifier is AreaOfEffect) {
-      properties[_modifier] = new AreaOfEffectAdapter(_modifier as AreaOfEffect);
+      properties[_modifier] =
+          new AreaOfEffectAdapter(_modifier as AreaOfEffect);
     } else if (modifier is Bestows) {
       properties[_modifier] = new BestowsAdapter(_modifier as Bestows);
     } else if (modifier is Damage) {
@@ -58,7 +60,8 @@ class ModifierEditor extends TextModifierExporter implements DoCheck {
     print(exporter.details[0].detailText);
     print(details[0].detailText);
 
-    if ((exporter.details[0].detailText != details[0].detailText) || (exporter.briefText != briefText)) {
+    if ((exporter.details[0].detailText != details[0].detailText) ||
+        (exporter.briefText != briefText)) {
       this.clear();
       _modifier.export(this);
     }
@@ -110,13 +113,15 @@ class BestowsAdapter {
     BestowsRange.single: "Single"
   };
 
-  SelectionOptions<BestowsRange> rangeList = new SelectionOptions.fromList(BestowsRange.values);
+  SelectionOptions<BestowsRange> rangeList =
+      new SelectionOptions.fromList(BestowsRange.values);
 
   Bestows _modifier;
   BestowsAdapter(this._modifier);
 
   SelectionModel<BestowsRange> get selectionModel {
-    SelectionModel<BestowsRange> model = new SelectionModel.single(selected: _modifier.range);
+    SelectionModel<BestowsRange> model =
+        new SelectionModel.single(selected: _modifier.range);
     model.selectionChanges.listen(onData);
     return model;
   }
@@ -133,10 +138,12 @@ class DamageAdapter {
 
   DamageAdapter(this._modifier);
 
-  SelectionOptions<DamageType> typeList = new SelectionOptions.fromList(DamageType.values);
+  SelectionOptions<DamageType> typeList =
+      new SelectionOptions.fromList(DamageType.values);
 
   SelectionModel<DamageType> get selectionModel {
-    SelectionModel<DamageType> model = new SelectionModel.single(selected: _modifier.type);
+    SelectionModel<DamageType> model =
+        new SelectionModel.single(selected: _modifier.type);
     model.selectionChanges.listen(onData);
     return model;
   }

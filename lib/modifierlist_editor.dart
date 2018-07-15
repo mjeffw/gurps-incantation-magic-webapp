@@ -53,7 +53,7 @@ class ModifierListEditor {
   static Map<String, Creator> map = {
     "Afflictions": () => new Affliction(null),
     "Afflictions (Stun)": () => new AfflictionStun(),
-    "Altered Traits": () => new AlteredTraits(new Trait(name:'')),
+    "Altered Traits": () => new AlteredTraits(new Trait(name: '')),
     "Area of Effect": () => new AreaOfEffect(),
     "Bestows a (Bonus or Penalty)": () => new Bestows(null),
     "Damage": () => new Damage(),
@@ -75,12 +75,14 @@ class ModifierListEditor {
   bool showModifierDialog = false;
 
   final ItemRenderer<String> renderer = (dynamic item) => item.toString();
-  final SelectionOptions<String> multiOptions = new SelectionOptions<String>.fromList(map.keys.toList(growable: false));
+  final SelectionOptions<String> multiOptions =
+      new SelectionOptions<String>.fromList(map.keys.toList(growable: false));
   final SelectionModel<String> multiSelectModel =
       new SelectionModel<String>.multi(selectedValues: <String>[]);
 
   void addModifier() {
-    multiSelectModel.selectedValues.forEach((it) => ritualModifiers.add(map[it]()));
+    multiSelectModel.selectedValues
+        .forEach((it) => ritualModifiers.add(map[it]()));
     multiSelectModel.clear();
     showModifierDialog = false;
   }
