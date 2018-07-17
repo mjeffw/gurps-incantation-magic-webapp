@@ -78,7 +78,7 @@ class EffectListEditor {
 
   // == Effect add/remove button support ==
   void addEffect() {
-    SpellEffect e = new SpellEffect(Effect.Sense, Path.Arcanum);
+    SpellEffect e = new SpellEffect(Effect.Sense, Path.arcanum);
     effects.add(e);
     _createSelectionModels(effects.indexOf(e));
   }

@@ -10,10 +10,12 @@ environment:
 dependencies:
   angular: ^5.0.0-beta
   angular_components: ^0.9.0-beta
-  gurps_incantation_magic_model:
-      path: ../gurps-incantation-magic-dart
   built_collection: ^3.1.1
   quiver: '>=0.29.0 <0.30.0'
+  gurps_dart:
+    path: ../gurps_dart
+  gurps_incantation_magic_model:
+      path: ../gurps-incantation-magic-dart
 
 dev_dependencies:
   angular_test: ^2.0.0-beta
