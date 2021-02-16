@@ -1,6 +1,7 @@
-import 'package:angular_components/angular_components.dart';
 import 'package:angular/angular.dart';
+import 'package:angular_components/angular_components.dart';
 import 'package:gurps_incantation_magic_model/incantation_magic.dart';
+
 import 'traitmodifier_list_editor.dart';
 
 @Component(
@@ -89,9 +90,9 @@ class AlteredTraitsAdapter {
 }
 
 class AreaOfEffectAdapter {
-  AreaOfEffect _area;
   AreaOfEffectAdapter(this._area);
 
+  AreaOfEffect _area;
   void incrementTargets() {
     _area.targets++;
   }
@@ -107,6 +108,8 @@ class AreaOfEffectAdapter {
 }
 
 class BestowsAdapter {
+  BestowsAdapter(this._modifier);
+
   final Map<BestowsRange, String> valueToString = {
     BestowsRange.broad: 'Broad',
     BestowsRange.moderate: "Moderate",
@@ -117,8 +120,6 @@ class BestowsAdapter {
       new SelectionOptions.fromList(BestowsRange.values);
 
   Bestows _modifier;
-  BestowsAdapter(this._modifier);
-
   SelectionModel<BestowsRange> get selectionModel {
     SelectionModel<BestowsRange> model =
         new SelectionModel.single(selected: _modifier.range);
@@ -134,12 +135,12 @@ class BestowsAdapter {
 }
 
 class DamageAdapter {
-  Damage _modifier;
-
   DamageAdapter(this._modifier);
 
+  Damage _modifier;
+
   SelectionOptions<DamageType> typeList =
-      new SelectionOptions.fromList(DamageType.values);
+      new SelectionOptions.fromList(DamageType.types);
 
   SelectionModel<DamageType> get selectionModel {
     SelectionModel<DamageType> model =
@@ -152,5 +153,5 @@ class DamageAdapter {
     list.forEach((r) => _modifier.type = r.added.first);
   }
 
-  String render(DamageType value) => damageTypeLabels[value];
+  String render(DamageType value) => value.label;
 }

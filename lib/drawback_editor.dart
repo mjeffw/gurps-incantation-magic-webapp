@@ -1,13 +1,12 @@
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import 'package:gurps_incantation_magic_model/incantation_magic.dart';
+import 'package:gurps_dart/gurps_dart.dart';
 
 @Component(
   selector: 'mjw-drawback-list-editor',
   styleUrls: const ['spell_editor.css'],
   directives: const <dynamic>[
     coreDirectives,
-    materialDirectives,
     materialInputDirectives,
     MaterialNumberValueAccessor,
   ],
@@ -24,7 +23,7 @@ import 'package:gurps_incantation_magic_model/incantation_magic.dart';
         <material-input style='width: 70%;' type='text' label="LIMITATION" floatingLabel [(ngModel)]="item.name">
         </material-input>
         <material-input style='width: 12%;' type="number" checkInteger trailingText="%" rightAlign
-          [(ngModel)]="item.level"></material-input>
+          [(ngModel)]="item.percent"></material-input>
       </span>
      
         <material-button icon class='remove-btn' (trigger)='drawbacks.removeAt(i)' style="margin-right: 24px;">
@@ -40,6 +39,6 @@ class DrawbackListEditor {
   List<TraitModifier> drawbacks;
 
   void addDrawback() {
-    drawbacks.add(new TraitModifier('', null, 0));
+    drawbacks.add(new TraitModifier(name: '', percent: 0));
   }
 }

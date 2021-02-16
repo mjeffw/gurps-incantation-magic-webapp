@@ -7,7 +7,6 @@ import 'package:gurps_incantation_magic_model/incantation_magic.dart';
   styleUrls: const ['spell_editor.css'],
   directives: const <dynamic>[
     coreDirectives,
-    materialDirectives,
     materialInputDirectives,
     MaterialNumberValueAccessor,
   ],
@@ -55,7 +54,7 @@ class TraitModifierListEditor {
 
   // == TraitModifier add/remove button support ==
   void addTraitModifier() {
-    _traitModifiable.addTraitModifier(new TraitModifier(null, null, 0));
+    _traitModifiable.addTraitModifier(new TraitModifier(percent: 0));
   }
 
   void removeModifier(int index) {

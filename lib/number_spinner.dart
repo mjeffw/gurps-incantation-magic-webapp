@@ -4,7 +4,7 @@ import 'package:angular/angular.dart';
 @Component(
   selector: 'mjw-number-spinner',
   styleUrls: const ['spell_editor.css'],
-  directives: const <dynamic>[coreDirectives, materialDirectives],
+  directives: const <dynamic>[coreDirectives],
   template: '''
      <div class="mjw-number-spinner">
       <material-button icon (trigger)='increment()'><glyph icon='add_circle'></glyph></material-button>

@@ -56,6 +56,7 @@ typedef RitualModifier Creator();
   directives: const <dynamic>[
     coreDirectives,
     materialDirectives,
+    materialInputDirectives,
     EffectListEditor,
     ModifierListEditor,
     ModifierEditor,

@@ -29,15 +29,17 @@ import 'package:gurps_incantation_magic_model/incantation_magic.dart';
         </material-list-item>
       </material-list>
   ''',
-  providers: const <dynamic>[materialProviders],
+  providers: const <dynamic>[
+    materialProviders,
+  ],
 )
 class EffectListEditor {
-  List<SpellEffect> _effects;
-
   EffectListEditor() {
     _effects = [];
     _fillOutModelLists();
   }
+
+  List<SpellEffect> _effects;
 
   List<SpellEffect> get effects => _effects;
 
@@ -78,7 +80,7 @@ class EffectListEditor {
 
   // == Effect add/remove button support ==
   void addEffect() {
-    SpellEffect e = new SpellEffect(Effect.Sense, Path.Arcanum);
+    SpellEffect e = new SpellEffect(Effect.Sense, Path.arcanum);
     effects.add(e);
     _createSelectionModels(effects.indexOf(e));
   }

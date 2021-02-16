@@ -1,10 +1,8 @@
-<material-expansionpanel flat [showSaveCancel]='false'
-                         name='{{modifier.name}}'
-                         expanded
-                         secondaryText='{{details[0].detailText}} ({{modifier.spellPoints}})'>
+<material-expansionpanel flat [showSaveCancel]='false' name='{{modifier.name}}' expanded
+  secondaryText='{{details[0].detailText}} ({{modifier.spellPoints}})'>
   <div value class='valueClass left-component-wrap'>
     <span class='right-component'>
-      <span class='modifier-text' [ngClass]="{ invisible: !modifier.inherent }">
+      <span class='modifier-text' [class.invisible]="!modifier.inherent">
         <glyph size="large" icon='check_circle'></glyph>
       </span>
     </span>
@@ -12,38 +10,43 @@
   <span [ngSwitch]="modifier.name">
     <span *ngIf="modifier.name != 'Affliction, Stunning'">
       <div style="padding-bottom: 12px;">
-        <material-button [disabled]='!modifier.canDecrementValue' icon (trigger)='modifier.decrementValue()'><material-icon baseline icon='remove_circle'></material-icon></material-button>
+        <material-button [disabled]='!modifier.canDecrementValue' icon (trigger)='modifier.decrementValue()'>
+          <material-icon baseline icon='remove_circle'></material-icon>
+        </material-button>
         <span>{{modifier.spellPoints}} SP</span>
-        <material-button [disabled]="!modifier.canIncrementValue" icon (trigger)='modifier.incrementValue()'><material-icon baseline icon='add_circle'></material-icon></material-button>
+        <material-button [disabled]="!modifier.canIncrementValue" icon (trigger)='modifier.incrementValue()'>
+          <material-icon baseline icon='add_circle'></material-icon>
+        </material-button>
       </div>
     </span>
 
     <div *ngSwitchDefault></div>
 
     <div *ngSwitchCase="'Afflictions'">
-      <material-input style="width: 80%;" label="EFFECT" floatingLabel [(ngModel)]="modifier.asHasSpecialization().specialization">
+      <material-input style="width: 80%;" label="EFFECT" floatingLabel
+        [(ngModel)]="modifier.asHasSpecialization().specialization">
       </material-input>
       <material-input style="width: 10%;" type="number" checkInteger trailingText="%" rightAlign
-                      [(ngModel)]="modifier.value">
+        [(ngModel)]="modifier.value">
       </material-input>
     </div>
 
     <div *ngSwitchCase="'Altered Traits'">
       <div style="display:table;">
         <material-input style="display:table-cell;vertical-align:middle;width:75%" label="TRAIT" floatingLabel
-                        [(ngModel)]="modifier.asHasTrait().trait.name"></material-input>
+          [(ngModel)]="modifier.asHasTrait().trait.name"></material-input>
         <material-input style="display:table-cell;vertical-align:middle;width:20%;padding-left:10px" type='number'
-                        checkInteger label="BASE COST" floatingLabel rightAlign
-                        [(ngModel)]="modifier.asHasTrait().trait.baseCost"></material-input>
+          checkInteger label="BASE COST" floatingLabel rightAlign [(ngModel)]="modifier.asHasTrait().trait.baseCost">
+        </material-input>
       </div>
       <div style="display:table;">
         <material-checkbox label="Has Levels" [(checked)]='modifier.asHasTrait().trait.hasLevels'></material-checkbox>
         <material-input style="display:table-cell;vertical-align:middle;padding-left:10px;width:20%" type='number'
-                        checkInteger label="COST/LEVEL" floatingLabel rightAlign [disabled]='!modifier.asHasTrait().trait.hasLevels'
-                        [(ngModel)]="modifier.asHasTrait().trait.costPerLevel"></material-input>
+          checkInteger label="COST/LEVEL" floatingLabel rightAlign [disabled]='!modifier.asHasTrait().trait.hasLevels'
+          [(ngModel)]="modifier.asHasTrait().trait.costPerLevel"></material-input>
         <material-input style="display:table-cell;vertical-align:middle;padding-left:10px;width:20%" type='number'
-                        checkInteger label="LEVELS" floatingLabel rightAlign [disabled]='!modifier.asHasTrait().trait.hasLevels'
-                        [(ngModel)]="modifier.asHasTrait().trait.levels"></material-input>
+          checkInteger label="LEVELS" floatingLabel rightAlign [disabled]='!modifier.asHasTrait().trait.hasLevels'
+          [(ngModel)]="modifier.asHasTrait().trait.levels"></material-input>
       </div>
       <mjw-traitmodifier-list-editor [traitModifiable]="modifier.asTraitModifiable()"></mjw-traitmodifier-list-editor>
     </div>
@@ -63,28 +66,24 @@
     </div>
 
     <div *ngSwitchCase="'Bestows a (Bonus or Penalty)'">
-      <material-dropdown-select
-          [options]='properties[modifier].rangeList'
-          [buttonText]='properties[modifier].render(modifier.asHasBestowsRange().range)'
-          [selection]='properties[modifier].selectionModel'
-          [itemRenderer]='properties[modifier].render'>
+      <material-dropdown-select [options]='properties[modifier].rangeList'
+        [buttonText]='properties[modifier].render(modifier.asHasBestowsRange().range)'
+        [selection]='properties[modifier].selectionModel' [itemRenderer]='properties[modifier].render'>
       </material-dropdown-select>
-      <material-input style="width: 100%;" label="ROLL TO MODIFY" floatingLabel [(ngModel)]="modifier.asHasSpecialization().specialization">
+      <material-input style="width: 100%;" label="ROLL TO MODIFY" floatingLabel
+        [(ngModel)]="modifier.asHasSpecialization().specialization">
       </material-input>
     </div>
 
     <div *ngSwitchCase="'Damage'">
       <material-checkbox label="Direct" [(checked)]="modifier.asDamage().direct"></material-checkbox>
-      <material-checkbox label="Explosive"
-                         [disabled]="modifier.asDamage().direct"
-                       [(checked)]="modifier.asDamage().explosive"></material-checkbox>
+      <material-checkbox label="Explosive" [disabled]="modifier.asDamage().direct"
+        [(checked)]="modifier.asDamage().explosive"></material-checkbox>
       <material-checkbox label="Vampiric" [(checked)]="modifier.asDamage().vampiric"></material-checkbox>
       <div>
-        <material-dropdown-select
-            [options]='properties[modifier].typeList'
-            [buttonText]='properties[modifier].render(modifier.asDamage().type)'
-            [selection]='properties[modifier].selectionModel'
-            [itemRenderer]='properties[modifier].render'>
+        <material-dropdown-select [options]='properties[modifier].typeList'
+          [buttonText]='properties[modifier].render(modifier.asDamage().type)'
+          [selection]='properties[modifier].selectionModel' [itemRenderer]='properties[modifier].render'>
         </material-dropdown-select>
         <mjw-traitmodifier-list-editor [traitModifiable]="modifier.asTraitModifiable()"></mjw-traitmodifier-list-editor>
       </div>
@@ -92,7 +91,8 @@
 
     <div style='padding-top: 16px;' class='left-component-wrap'>
       <span class='left-component'>
-        <material-checkbox style="padding-top: 8px;" label="Inherent" [(checked)]='modifier.inherent'></material-checkbox>
+        <material-checkbox style="padding-top: 8px;" label="Inherent" [(checked)]='modifier.inherent'>
+        </material-checkbox>
       </span>
       <material-button icon class='remove-btn' (trigger)='removeModifier()'>
         <glyph icon='remove_circle'></glyph>

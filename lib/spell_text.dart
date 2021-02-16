@@ -5,7 +5,7 @@ import 'package:gurps_incantation_magic_model/incantation_magic.dart';
 @Component(
   selector: 'mjw-spell-text',
   styleUrls: const ['spell_editor.css'],
-  directives: const <dynamic>[materialDirectives],
+  directives: const <dynamic>[],
   template: '''
   <h3><i>{{name}}</i></h3>
   <div>
