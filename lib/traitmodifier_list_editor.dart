@@ -1,6 +1,7 @@
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:gurps_incantation_magic_model/incantation_magic.dart';
+import 'package:gurps_incantation_magic_webapp/trait_modifier_list_proxy.dart';
 
 @Component(
   selector: 'mjw-traitmodifier-list-editor',
@@ -13,13 +14,13 @@ import 'package:gurps_incantation_magic_model/incantation_magic.dart';
   template: '''
     <div>
       <div class='left-component-wrap'>
-        <material-button icon class='add-btn material-list-item-secondary' (trigger)='addTraitModifier()'>
+        <material-button icon class='add-btn material-list-item-secondary' (trigger)='traitModifiable.addProxy()'>
           <glyph icon='add_circle'></glyph>
         </material-button>
         <div class='left-component subheading'>TRAIT MODIFIERS</div>
       </div>
       
-      <div *ngFor='let item of traitModifiable.traitModifiers; let i = index' class='left-component-wrap'>
+      <div *ngFor='let item of traitModifiable; let i = index' class='left-component-wrap'>
         <span class="left-component">
           <material-input style='width: 70%;' 
                           type='text' 
@@ -32,11 +33,11 @@ import 'package:gurps_incantation_magic_model/incantation_magic.dart';
                           checkInteger
                           trailingText="%"
                           rightAlign
-                          [(ngModel)]="item.level">
+                          [(ngModel)]="item.percent">
           </material-input>
         </span>
        
-          <material-button icon class='remove-btn' (trigger)='removeModifier(i)' style="margin-right: 24px;">
+          <material-button icon class='remove-btn' (trigger)='traitModifiable.removeAt(i)' style="margin-right: 24px;">
             <glyph icon='remove_circle'></glyph>
           </material-button>              
       </div> 
@@ -45,19 +46,6 @@ import 'package:gurps_incantation_magic_model/incantation_magic.dart';
   providers: const <dynamic>[materialProviders],
 )
 class TraitModifierListEditor {
-  TraitModifiable _traitModifiable;
-
-  TraitModifiable get traitModifiable => _traitModifiable;
-
   @Input()
-  set traitModifiable(TraitModifiable t) => _traitModifiable = t;
-
-  // == TraitModifier add/remove button support ==
-  void addTraitModifier() {
-    _traitModifiable.addTraitModifier(new TraitModifier(percent: 0));
-  }
-
-  void removeModifier(int index) {
-    _traitModifiable.removeAt(index);
-  }
+  TraitModifierListProxy traitModifiable; // = TraitModifierListProxy();
 }

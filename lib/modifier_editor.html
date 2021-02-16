@@ -48,7 +48,7 @@
           checkInteger label="LEVELS" floatingLabel rightAlign [disabled]='!modifier.asHasTrait().trait.hasLevels'
           [(ngModel)]="modifier.asHasTrait().trait.levels"></material-input>
       </div>
-      <mjw-traitmodifier-list-editor [traitModifiable]="modifier.asTraitModifiable()"></mjw-traitmodifier-list-editor>
+      <mjw-traitmodifier-list-editor [traitModifiable]="asTraitModifierListProxy()"></mjw-traitmodifier-list-editor>
     </div>
 
 
@@ -85,7 +85,7 @@
           [buttonText]='properties[modifier].render(modifier.asDamage().type)'
           [selection]='properties[modifier].selectionModel' [itemRenderer]='properties[modifier].render'>
         </material-dropdown-select>
-        <mjw-traitmodifier-list-editor [traitModifiable]="modifier.asTraitModifiable()"></mjw-traitmodifier-list-editor>
+        <mjw-traitmodifier-list-editor [traitModifiable]="asTraitModifierListProxy()"></mjw-traitmodifier-list-editor>
       </div>
     </div>
 

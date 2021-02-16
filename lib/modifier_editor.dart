@@ -1,6 +1,7 @@
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:gurps_incantation_magic_model/incantation_magic.dart';
+import 'package:gurps_incantation_magic_webapp/trait_modifier_list_proxy.dart';
 
 import 'traitmodifier_list_editor.dart';
 
@@ -66,6 +67,10 @@ class ModifierEditor extends TextModifierExporter implements DoCheck {
       this.clear();
       _modifier.export(this);
     }
+  }
+
+  TraitModifierListProxy asTraitModifierListProxy() {
+    return TraitModifierListProxy(source: modifier.asTraitModifiable().traitModifiers);
   }
 }
 

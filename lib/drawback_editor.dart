@@ -2,6 +2,8 @@ import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:gurps_dart/gurps_dart.dart';
 
+import 'trait_modifier_list_proxy.dart';
+
 @Component(
   selector: 'mjw-drawback-list-editor',
   styleUrls: const ['spell_editor.css'],
@@ -12,7 +14,7 @@ import 'package:gurps_dart/gurps_dart.dart';
   ],
   template: '''
     <div class='left-component-wrap'>
-      <material-button icon class='add-btn material-list-item-secondary' (trigger)='addDrawback()'>
+      <material-button icon class='add-btn material-list-item-secondary' (trigger)='drawbacks.addProxy()'>
         <glyph icon='add_circle'></glyph>
       </material-button>
       <div class='left-component subheading'>DRAWBACKS</div>
@@ -36,9 +38,5 @@ import 'package:gurps_dart/gurps_dart.dart';
 )
 class DrawbackListEditor {
   @Input()
-  List<TraitModifier> drawbacks;
-
-  void addDrawback() {
-    drawbacks.add(new TraitModifier(name: '', percent: 0));
-  }
+  TraitModifierListProxy drawbacks = TraitModifierListProxy();
 }

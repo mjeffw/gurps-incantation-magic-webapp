@@ -4,6 +4,7 @@
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:gurps_incantation_magic_model/incantation_magic.dart';
+import 'package:gurps_incantation_magic_webapp/trait_modifier_list_proxy.dart';
 import 'effectlist_editor.dart';
 import 'modifierlist_editor.dart';
 import 'modifier_editor.dart';
@@ -33,7 +34,7 @@ typedef RitualModifier Creator();
     </div>
     
     <div>
-      <mjw-drawback-list-editor [drawbacks]='spell.drawbacks'></mjw-drawback-list-editor>
+      <mjw-drawback-list-editor [drawbacks]='drawbacks'></mjw-drawback-list-editor>
     </div>
     
     <div>
@@ -79,4 +80,7 @@ class SpellEditor {
     }
     return _spell;
   }
+
+  TraitModifierListProxy get drawbacks =>
+      TraitModifierListProxy(source: spell.drawbacks);
 }
